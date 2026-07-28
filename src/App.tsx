@@ -1,5 +1,8 @@
+import Footer from './components/layouts/Footer';
 function App() {
-  return <h1>Home Page</h1>;
+  return(
+    <Footer/>
+  );
 }
 
 export default App;
