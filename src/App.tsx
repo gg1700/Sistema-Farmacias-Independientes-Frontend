@@ -1,5 +1,7 @@
+import ProvidersReport from './pages/reports/reportProvider';
+
 function App() {
-  return <h1>Home Page</h1>;
+  return <ProvidersReport />;
 }
 
-export default App;
+export default App
