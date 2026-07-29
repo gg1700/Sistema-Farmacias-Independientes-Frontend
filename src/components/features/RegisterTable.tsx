@@ -19,7 +19,7 @@ function RegisterTable({ subtitle, header, registers, pagination }: any) {
   return (
     <section className="flex flex-col justify-center items-center p-3">
       <h2 className="text-black text-center font-medium text-2xl p-3">{subtitle}</h2>
-      <div className="bg-modals grid w-4xl rounded-2xl shadow-sm h-92" lang="es">  
+      <div className="bg-modals grid w-4xl rounded-2xl shadow-sm h-87" lang="es">  
         <ul className="grid grid-cols-7 gap-2 text-center items-center p-2 border-b-2 border-[#ADA87F]">
           {
             header.map((h: any) => (

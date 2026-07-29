@@ -8,7 +8,7 @@ function SearchSelector({ subtitle, dropDownProps, actionButtonProps }: SearchSe
   
   return (
     <>
-      <section className="flex flex-col justify-center items-center m-7">
+      <section className="flex flex-col justify-center items-center">
         <h2 className="text-black text-center font-medium text-2xl p-2">{subtitle}</h2>
         <div className="bg-modals flex items-center w-4xl h-14 rounded-2xl py-4 px-6 gap-1 shadow-sm">
           <div>

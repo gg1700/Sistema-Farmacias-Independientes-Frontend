@@ -1,15 +1,11 @@
 import { IoMdSave } from "react-icons/io";
-import ActionButton from "../components/ui/ActionButton";
 import { FaPlus } from "react-icons/fa";
-//import DropDown from "../components/ui/DropDown";
-//import ActionButton from "../components/ui/ActionButton";
 import SearchSelector from "../components/features/SearchSelector";
 import { supplyList } from "../constants/supplies";
 import RegisterTable from "../components/features/RegisterTable";
 import { DropDownProps } from "../types/DropDown.types";
 import { ActionButtonProps } from "../types/ActionButton.types";
 import { Supplies } from "../types/RegisterTable.types";
-import { useState } from "react";
 
 function Test() {
   const dropDown : DropDownProps = {
@@ -41,12 +37,12 @@ function Test() {
   const testHeader = ["Nom.", "Cant.", "Cat.", "Subcat.", "P. Unit.", "Fec. Vto.", "Lote"];
 
   return (
-    <>
+    <section className="flex flex-col justify-center items-center h-full">
       <SearchSelector subtitle="Datos de Compra" dropDownProps={dropDown} actionButtonProps={actionButton}>
       </SearchSelector>
       <RegisterTable subtitle={"Productos Comprados"} header={testHeader} registers={newSupplyList} pagination={4}>
       </RegisterTable>
-    </>
+    </section>
   );
 }
 
