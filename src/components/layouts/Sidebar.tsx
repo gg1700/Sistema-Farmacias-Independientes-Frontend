@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { FaShoppingCart, FaBoxes, FaTruck, FaQuestionCircle } from 'react-icons/fa';
-import { FaXmark, FaCircleXmark } from 'react-icons/fa6';
+import { FaXmark } from 'react-icons/fa6';
 
 const styles = {
     container: "font-second",
