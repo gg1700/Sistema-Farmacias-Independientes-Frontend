@@ -13,7 +13,7 @@ function OptionWorkSpace({ options }: OptionWorkSpaceProps) {
             </OptionButton>
           </li>
         )
-      )}
+      )};
     </ul>
   );
 }
