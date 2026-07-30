@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DateFilterField from '../components/features/DateFilterField';
-import SelectFilterField from '../components/features/SelectFilterField';
+import DateFilterField from '../components/ui/DateFilterField';
+import SelectFilterField from '../components/ui/SelectFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import Pagination from '../components/features/Pagination';
@@ -9,7 +9,7 @@ import PrintButton from '../components/ui/PrintButton';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import { buildPurchaseLineItems } from '../utils/buildPurchaseLineItems';
-import type { PurchaseLineItem } from '../types/Inventory';
+import type { PurchaseLineItem } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",

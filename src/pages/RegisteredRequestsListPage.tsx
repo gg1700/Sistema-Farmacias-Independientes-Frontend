@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaFileAlt, FaCheckCircle } from 'react-icons/fa';
-import TextFilterField from '../components/features/TextFilterField';
-import DateFilterField from '../components/features/DateFilterField';
+import TextFilterField from '../components/ui/TextFilterField';
+import DateFilterField from '../components/ui/DateFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import RequestStatusBadge from '../components/features/RequestStatusBadge';
@@ -10,7 +10,7 @@ import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialRequestsData from '../data/registeredRequests.json';
-import type { RegisteredRequest } from '../types/Inventory';
+import type { RegisteredRequest } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",

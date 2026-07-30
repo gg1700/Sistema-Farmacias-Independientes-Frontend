@@ -17,7 +17,7 @@ interface ProviderData {
 }
 
 interface ModalUpdateProviderProps {
-  data: ProviderData;
+  data: any;
   onSave?: (data: ProviderData) => void;
   buttonText?: string;
 }
