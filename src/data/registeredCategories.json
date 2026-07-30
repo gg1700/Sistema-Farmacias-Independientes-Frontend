@@ -1,0 +1,9 @@
+[
+  { "id": 1, "category": "Medicamentos", "subcategories": ["Analgésicos", "Antibióticos"] },
+  { "id": 2, "category": "Insumos Médicos", "subcategories": ["Guantes", "Jeringas"] },
+  { "id": 3, "category": "Higiene Personal", "subcategories": ["Jabones", "Shampoo"] },
+  { "id": 4, "category": "Material de Curación", "subcategories": ["Gasas", "Vendas", "Algodón"] },
+  { "id": 5, "category": "Equipos Médicos", "subcategories": ["Tensiómetros", "Termómetros"] },
+  { "id": 6, "category": "Vitaminas y Suplementos", "subcategories": ["Multivitamínicos", "Minerales"] },
+  { "id": 7, "category": "Cuidado Dental", "subcategories": ["Pastas Dentales", "Enjuagues"] }
+]

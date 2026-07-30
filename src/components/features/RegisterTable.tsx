@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RiPlayLargeFill } from "react-icons/ri";
 import { RiPlayReverseLargeFill } from "react-icons/ri";
-import ActionButton from "../ui/ActionButton";  
+import ActionButton from "./ActionButton";  
 
 function RegisterTable({ subtitle, header, registers, pagination }: any) {
   const [page, setPage] = useState(0);

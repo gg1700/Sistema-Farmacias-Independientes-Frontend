@@ -6,11 +6,11 @@ import { FaShoppingCart, FaBoxes, FaTruck, FaQuestionCircle } from 'react-icons/
 import { FaXmark } from 'react-icons/fa6';
 
 const styles = {
-    container: "font-second",
+    container: "font-second overflow-x-hidden",
     title: "px-5 py-6 font-bold text-background font-first text-xl leading-snug",
     bulletPoint: "block w-2 h-2 rounded-full bg-background",
     helpContainer: "border-t border-background/20 mt-auto",
-    menuItemOption: 'hover:underline hover:scale-105 transition-transform group',
+    menuItemOption: 'hover:underline transition-colors group',
     iconBack: 'transition-tranform duration-300 group-hover:rotate-90'
 }
 
@@ -70,10 +70,11 @@ function SidebarOptions() {
             rootStyles={{
                 color: 'var(--color-background)',
                 border: 'none',
+                overflowX: 'hidden',
             }}
             className={styles.container}
         >
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full overflow-x-hidden">
                 <div className={styles.title}>
                     Sistema de Gestión <br /> Abastecimiento de <br /> Insumos e Inventario
                 </div>
