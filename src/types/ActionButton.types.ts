@@ -6,4 +6,7 @@ export interface ActionButtonProps{
   IconName: React.ElementType;
   action: string;
   clickAction?: () => void;
+  typeButton?: string;
+  padding?: string;
+  dimentions?: string;
 }

@@ -1,13 +1,12 @@
-import { IoMdSave } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
 import SearchSelector from "../components/features/SearchSelector";
 import { supplyList } from "../constants/supplies";
 import RegisterTable from "../components/features/RegisterTable";
-import { DropDownProps } from "../types/DropDown.types";
+import { DropDownProps } from "../types/Dropdown.types";
 import { ActionButtonProps } from "../types/ActionButton.types";
 import { Supplies } from "../types/RegisterTable.types";
 
-function Test() {
+function RegisterSupply() {
   const dropDown : DropDownProps = {
     description: "Proveedor",
     options: ["Pedri", "Yamal", "Messi", "Mbappe"]
@@ -37,13 +36,15 @@ function Test() {
   const testHeader = ["Nom.", "Cant.", "Cat.", "Subcat.", "P. Unit.", "Fec. Vto.", "Lote"];
 
   return (
-    <section className="flex flex-col justify-center items-center h-full">
+    <section className="flex flex-col justify-center items-center h-full gap-3">
       <SearchSelector subtitle="Datos de Compra" dropDownProps={dropDown} actionButtonProps={actionButton}>
       </SearchSelector>
-      <RegisterTable subtitle={"Productos Comprados"} header={testHeader} registers={newSupplyList} pagination={4}>
+
+      <RegisterTable tableStyles="w-5xl h-87" buttonStyles="gap-20" subtitle={"Productos Comprados"} header={testHeader} 
+      registers={newSupplyList} pagination={4}>
       </RegisterTable>
     </section>
   );
 }
 
-export default Test;
+export default RegisterSupply;

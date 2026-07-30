@@ -11,7 +11,7 @@ const styles={
 
 function Header(){
     return(
-        <div className="bg-secondary/100 flex gap-64">
+        <div className="bg-secondary/100 flex gap-80">
             <div className={`${styles.div}  ml-16`}>
                 <button className={styles.button}><MdContactPhone size={45}/></button>
                 <p className={styles.text}>Ver Proveedores Registrados</p>
