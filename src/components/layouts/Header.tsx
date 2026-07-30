@@ -4,9 +4,9 @@ import { MdMedicalServices } from "react-icons/md";
 import { MdCategory } from "react-icons/md";
 
 const styles={
-    button:"flex w-17 h-17 border border-white rounded-full items-center justify-center bg-background p-2 m-auto text-primary hover:scale-110 hover:text-black hover:bg-[#82d9b6] hover:cursor-pointer transition-transform",
-    div:"w-35 p-2 h-35",
-    text:"text-center font-semibold text-first py-2.5 hover:underline hover:scale-105 hover:text-primary hover:cursor-pointer transition-transform"
+    button:"flex w-17 h-17 border border-white rounded-full items-center justify-center bg-background p-2 m-auto text-primary shadow-md group-hover:scale-110 group-hover:bg-[#82d9b6] group-hover:cursor-pointer transition-transform",
+    div:"w-35 p-2 h-35 hover:underline group-hover:scale-105 hover:text-primary hover:cursor-pointer transi tion-transform group",
+    text:"text-center font-semibold text-first py-2.5"
 }
 
 function Header(){
