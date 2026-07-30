@@ -10,7 +10,7 @@ import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialPurchasesData from '../data/registeredPurchases.json';
-import type { RegisteredPurchase } from '../types/inventory';
+import type { RegisteredPurchase } from '../types/Inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
@@ -19,7 +19,7 @@ const styles = {
     actionsCell: "flex gap-3 justify-center",
 }
 
-
+const PURCHASES_PER_PAGE = 3;
 
 function RegisteredPurchasesListPage() {
     const [purchases, setPurchases] = useState<RegisteredPurchase[]>(initialPurchasesData as RegisteredPurchase[]);
@@ -43,7 +43,7 @@ function RegisteredPurchasesListPage() {
         [startDate, endDate, supplierFilter]
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredPurchases,3);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredPurchases, PURCHASES_PER_PAGE);
 
     function handleDeletePurchase(purchaseId: number) {
         setPurchases((currentPurchases) => currentPurchases.filter((purchase) => purchase.id !== purchaseId));
@@ -59,7 +59,7 @@ function RegisteredPurchasesListPage() {
             header: "Acciones",
             render: (purchase) => (
                 <div className={styles.actionsCell}>
-                    <Link to={`/adquisiciones/registro/${purchase.id}`}>
+                    <Link to={`/purchases/register/${purchase.id}`}>
                         <IconButton icon={<FaFileAlt size={18} />} label="Ver detalle de compra" />
                     </Link>
                     <IconButton icon={<FaTrash size={18} />} label="Eliminar compra" onClick={() => handleDeletePurchase(purchase.id)} />
@@ -85,7 +85,7 @@ function RegisteredPurchasesListPage() {
                 columns={columns}
                 rows={paginatedItems}
                 getRowKey={(purchase) => purchase.id}
-                itemsPerPage={3}
+                itemsPerPage={PURCHASES_PER_PAGE}
             />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>

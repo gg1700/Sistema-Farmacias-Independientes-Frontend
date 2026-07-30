@@ -5,7 +5,7 @@ import IconButton from '../components/features/IconButton';
 import Pagination from '../components/features/Pagination';
 import usePagination from '../hooks/usePagination';
 import initialCategoriesData from '../data/registeredCategories.json';
-import type { RegisteredCategory } from '../types/inventory';
+import type { RegisteredCategory } from '../types/Inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
