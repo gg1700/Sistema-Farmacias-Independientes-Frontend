@@ -10,7 +10,7 @@ import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialPurchasesData from '../data/registeredPurchases.json';
-import type { RegisteredPurchase } from '../types/Inventory';
+import type { RegisteredPurchase } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",

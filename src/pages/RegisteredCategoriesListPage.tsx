@@ -5,7 +5,9 @@ import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import usePagination from '../hooks/usePagination';
 import initialCategoriesData from '../data/registeredCategories.json';
-import type { RegisteredCategory } from '../types/Inventory';
+import type { RegisteredCategory } from '../types/inventory';
+import { CategoryModal } from '../components/modals/CategoryModal';
+import { useModal } from '../contexts/ModalContext';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
@@ -16,10 +18,34 @@ const styles = {
 function RegisteredCategoriesListPage() {
     const [categories, setCategories] = useState<RegisteredCategory[]>(initialCategoriesData as RegisteredCategory[]);
 
+    const { openModal } = useModal();
+
     const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(categories, 4);
 
     function handleEditCategory(category: RegisteredCategory) {
-        console.log('Editar categoria', category);
+        const subcategories = category.subcategories.map(sc => ({
+            id: `${category.id}-${sc}`,
+            nombre: sc
+          })
+        );
+
+        openModal(
+            <CategoryModal
+                categoryName={category.category}
+                subcategories={subcategories}
+                onSave={(categoryName, subcategories) => {
+                    // Logica de guardado
+                }}
+                onEditSubcategory={(id) => {
+                    // Logica de editado
+                }}
+                onDeleteSubcategory={(id) => {
+                    // Logica de borrado
+                }}
+                buttonText="Actualizar"
+                editable={true}
+            />
+        );
     }
 
     function handleDeleteCategory(categoryId: number) {
