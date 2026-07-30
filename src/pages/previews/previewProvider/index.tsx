@@ -1,99 +1,93 @@
-// pages/previews/ProvidersPreview/index.tsx
-import React, { useEffect } from 'react';
+﻿// pages/previews/ProvidersPreview/index.tsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaUserCircle, FaClipboardCheck, FaBriefcaseMedical, FaShapes, FaCalendarAlt, FaPrint } from 'react-icons/fa';
 import { mockProviders } from '../../../mocks/data';
-//import './styles.css';
 
 const ProvidersPreview: React.FC = () => {
-  // Datos de ejemplo (en producción vendrían de props o contexto)
+  const navigate = useNavigate();
   const providers = mockProviders;
 
-  // Auto-imprimir al cargar (opcional)
-  useEffect(() => {
-    // setTimeout(() => window.print(), 500);
-  }, []);
-
   return (
-    <div className="preview-proveedores">
-      {/* Header con navegación */}
-      <div className="preview-header">
-        <h1>Filtrado y Vista</h1>
-        <h2>Previa de Proveedores</h2>
-        <div className="preview-nav">
-          <span>Adquisiciones</span>
-          <span>Inventario</span>
-          <span>Proveedores</span>
-        </div>
-      </div>
-
-      {/* Sección de filtros (solo visual) */}
-      <div className="preview-filtros">
-        <div className="preview-filtro-columna">
-          <h3>Ver Proveedores Registrados</h3>
-          <div className="filtro-item">
-            <label>Fecha de Inicio</label>
-            <span>__/__/____</span>
-          </div>
-          <div className="filtro-item">
-            <label>Activo</label>
-            <span>✓</span>
+    <div className="p-6 max-w-7xl mx-auto bg-white">
+      <div className="bg-[#F4F4F4] rounded-3xl p-6 mb-6">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900">Filtrado y Vista</h1>
+            <h2 className="text-2xl font-semibold text-slate-900">Previa de Proveedores</h2>
           </div>
         </div>
 
-        <div className="preview-filtro-columna">
-          <h3>Solicitudes de Insumos</h3>
-          <div className="filtro-item">
-            <label>Fecha de Fin</label>
-            <span>__/__/____</span>
-          </div>
-        </div>
+        <div className="bg-white rounded-3xl shadow-sm p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <span className="font-semibold text-slate-700">Fecha de Inicio</span>
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
+                  <FaCalendarAlt className="text-slate-500" />
+                  <div className="h-5 w-full rounded bg-slate-300" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="font-semibold text-slate-700">Fecha de Fin</span>
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
+                  <FaCalendarAlt className="text-slate-500" />
+                  <div className="h-5 w-full rounded bg-slate-300" />
+                </div>
+              </div>
+            </div>
 
-        <div className="preview-filtro-columna">
-          <h3>Ver Existencias</h3>
-          <div className="filtro-item">
-            <label>Fecha de Fin</label>
-            <span>__/__/____</span>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold text-slate-700">Activo</span>
+              <select className="w-full rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-slate-700">
+                <option>Activo</option>
+                <option>Inactivo</option>
+                <option>Todos</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Tabla para impresión */}
-      <div className="preview-tabla">
-        <h3>Vista Previa de Impresión</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Nombre</th>
-              <th>Correo Electrónico</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
-              <th>Activo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {providers.map((provider, index) => (
-              <tr key={provider.id}>
-                <td>{index + 1}</td>
-                <td>{provider.name}</td>
-                <td>{provider.email}</td>
-                <td>{provider.address}</td>
-                <td>{provider.phone}</td>
-                <td>{provider.isActive ? 'Activo' : 'Inactivo'}</td>
+      <div className="bg-[#F2EDD7] rounded-3xl border border-slate-200 p-6 mb-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+          <h3 className="text-xl font-semibold text-slate-900">Vista Previa de Impresion</h3>
+          <button
+            type="button"
+            onClick={() => navigate('/reporte/proveedores')}
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition"
+          >
+            <FaPrint /> Impresion
+          </button>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse bg-[#F7F2DD] rounded-3xl overflow-hidden">
+            <thead>
+              <tr className="text-left text-slate-900">
+                <th className="px-6 py-4 border border-slate-300 rounded-tl-3xl">No.</th>
+                <th className="px-6 py-4 border border-slate-300">Nombre</th>
+                <th className="px-6 py-4 border border-slate-300">Correo Electronico</th>
+                <th className="px-6 py-4 border border-slate-300">Direccion</th>
+                <th className="px-6 py-4 border border-slate-300">Telefono</th>
+                <th className="px-6 py-4 border border-slate-300 rounded-tr-3xl">Activo</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Footer */}
-      <div className="preview-footer">
-        <div className="footer-nav">
-          <span>Ayuda</span>
-          <span>Volver Atras</span>
-        </div>
-        <div className="footer-info">
-          <p>© 2026 Farmacia Angelica — Sistema de Gestión de Compras e Inventario</p>
-          <p>Versión 1.0 | Soporte técnico: losvikingosnoruegos@gmail.com</p>
+            </thead>
+            <tbody>
+              {providers.map((provider, index) => (
+                <tr key={provider.id} className="odd:bg-[#F7F2DD] even:bg-[#EFE8C9]">
+                  <td className="px-6 py-4 border border-slate-300">{index + 1}</td>
+                  <td className="px-6 py-4 border border-slate-300">{provider.name}</td>
+                  <td className="px-6 py-4 border border-slate-300">{provider.email}</td>
+                  <td className="px-6 py-4 border border-slate-300">{provider.address}</td>
+                  <td className="px-6 py-4 border border-slate-300">{provider.phone}</td>
+                  <td className="px-6 py-4 border border-slate-300">
+                    <span className={`inline-flex h-3.5 w-3.5 rounded-full ${provider.isActive ? 'bg-green-500' : 'bg-red-500'}`} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

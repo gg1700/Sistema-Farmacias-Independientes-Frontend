@@ -1,13 +1,16 @@
+// types/request.types.ts
 export interface Request {
   id: string | number;
   requester: string;
-  department: string;
+  provider?: string;
+  department?: string;
   product: string;
+  description?: string;
   quantity: number;
-  priority: 'LOW' | 'MEDIUM' | 'HIGH';
-  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'FULFILLED';
+  priority?: string;
+  status: string;
   requestDate: string;
-  requiredDate: string;
+  requiredDate?: string;
   comments?: string;
 }
 

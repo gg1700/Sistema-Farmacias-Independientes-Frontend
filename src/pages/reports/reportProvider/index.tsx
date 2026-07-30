@@ -1,120 +1,123 @@
-// pages/reports/ProvidersReport/index.tsx
-import React from 'react';
+﻿// pages/reports/ProvidersReport/index.tsx
+import React, { useState } from 'react';
+import { FaArrowLeft, FaPrint } from 'react-icons/fa';
 import { useProvidersReport } from '../../../hooks/useProvidersReport';
-//import './styles.css';
 
 const ProvidersReport: React.FC = () => {
-  const {
-    data,
-    loading,
-    error,
-    filters,
-    updateFilters,
-    applyFilters,
-    clearFilters
-  } = useProvidersReport();
+  const { data, loading, error, filters, updateFilters } = useProvidersReport();
+  const [responsible, setResponsible] = useState('');
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return <div className="text-red-600 p-4">{error}</div>;
   }
 
   return (
-    <div className="reporte-proveedores">
-      {/* Header con título y botones */}
-      <div className="report-header">
-        <h1>Reporte de Proveedores</h1>
-        <div className="header-buttons">
-          <button className="btn-help">Ayuda</button>
-          <button className="btn-back">Volver Atras</button>
-        </div>
-      </div>
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="bg-white border border-black rounded-lg shadow-sm">
+        <div className="px-8 py-8">
+          <div className="flex flex-col lg:flex-row justify-between gap-8 border-b border-black/10 pb-8 mb-8">
+            <div className="flex items-center gap-6">
+              <div className="w-24 h-24 rounded-full border border-black bg-[#EEF4EE] flex items-center justify-center text-center text-sm font-bold text-[#0C6441] leading-tight">
+                Farmacia<br />Angélica
+              </div>
+              <div>
+                <p className="text-sm uppercase tracking-[0.2em] text-slate-600">Reporte de Proveedores</p>
+                <h1 className="text-3xl font-bold text-slate-900 mt-2">Detalle de Proveedores</h1>
+              </div>
+            </div>
 
-      {/* Sección de filtros */}
-      <div className="filtros-section">
-        <div className="filtro-columna">
-          <h3>Solicitudes de Insumos</h3>
-          <button className="filtro-boton">Ver Proveedores</button>
-          <button className="filtro-boton">Registrados</button>
-        </div>
-
-        <div className="filtro-columna">
-          <h3>Detalle de Proveedores</h3>
-          <div className="filtro-fecha">
-            <label>De</label>
-            <input 
-              type="date" 
-              value={filters.startDate || ''}
-              onChange={(e) => updateFilters({ startDate: e.target.value })}
-            />
-            <label>a</label>
-            <input 
-              type="date"
-              value={filters.endDate || ''}
-              onChange={(e) => updateFilters({ endDate: e.target.value })}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full sm:w-auto">
+              <div>
+                <p className="text-sm font-semibold text-slate-700">Pagina</p>
+                <div className="mt-2 h-12 rounded-md bg-slate-300" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-slate-700">Fecha</p>
+                <div className="mt-2 h-12 rounded-md bg-slate-300" />
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="filtro-columna">
-          <h3>Pagina</h3>
-          <div className="filtro-fecha">
-            <label>Fecha</label>
-            <input 
-              type="date"
-              value={filters.startDate || ''}
-              onChange={(e) => updateFilters({ startDate: e.target.value })}
-            />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 mb-8">
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4 items-center">
+                <span className="font-semibold text-slate-800">Responsable</span>
+                <div className="w-full px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[52px] flex items-center">
+                  <span className="text-slate-400">{responsible || "Responsable"}</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4 items-center">
+                <span className="font-semibold text-slate-800">De</span>
+                <div className="px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[52px] flex items-center">
+                  <span className="text-slate-400">{filters.startDate || "XX/XX/XX"}</span>
+                </div>
+                <span className="font-semibold text-slate-800">a</span>
+                <div className="px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[52px] flex items-center">
+                  <span className="text-slate-400">{filters.endDate || "XX/XX/XX"}</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="filtro-columna">
-          <h3>Responsable</h3>
-          <input 
-            type="text"
-            placeholder="Responsable"
-            className="input-responsable"
-          />
-        </div>
-      </div>
-
-      {/* Tabla */}
-      <div className="tabla-section">
-        <h3>Detalle de Proveedores</h3>
-        <div className="tabla-container">
-          <table>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Nombre</th>
-                <th>Correo Electrónico</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Activo</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <tr><td colSpan={6} className="cargando">Cargando...</td></tr>
-              ) : data?.providers.length === 0 ? (
-                <tr><td colSpan={6} className="sin-datos">No hay datos</td></tr>
-              ) : (
-                data?.providers.map((provider, index) => (
-                  <tr key={provider.id}>
-                    <td>{index + 1}</td>
-                    <td>{provider.name}</td>
-                    <td>{provider.email}</td>
-                    <td>{provider.address}</td>
-                    <td>{provider.phone}</td>
-                    <td>
-                      <span className={provider.isActive ? 'activo' : 'inactivo'}>
-                        {provider.isActive ? '✓' : '✗'}
-                      </span>
-                    </td>
+          <div className="overflow-x-auto border border-black rounded-md">
+            <table className="min-w-full border-collapse">
+              <thead>
+                <tr className="bg-slate-100">
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">No.</th>
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Nombre</th>
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Correo Electrónico</th>
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Dirección</th>
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Teléfono</th>
+                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Activo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={6} className="py-10 text-center text-slate-500">Cargando...</td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : !data || data.providers.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="py-10 text-center text-slate-500">No hay datos</td>
+                  </tr>
+                ) : (
+                  data?.providers?.map((provider, index) => (
+                    <tr key={provider.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-5 py-4 border border-black text-sm">{index + 1}</td>
+                      <td className="px-5 py-4 border border-black text-sm">{provider.name}</td>
+                      <td className="px-5 py-4 border border-black text-sm">{provider.email}</td>
+                      <td className="px-5 py-4 border border-black text-sm">{provider.address}</td>
+                      <td className="px-5 py-4 border border-black text-sm">{provider.phone}</td>
+                      <td className="px-5 py-4 border border-black text-sm">
+                        <span
+                          className={`inline-flex h-3.5 w-3.5 rounded-full ${provider.isActive ? 'bg-green-500' : 'bg-red-500'}`}
+                          aria-label={provider.isActive ? 'Activo' : 'Inactivo'}
+                        />
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 pb-8">
+            <button
+              type="button"
+              onClick={() => window.history.back()}
+              className="inline-flex items-center gap-3 px-8 py-3 bg-[#F2EDD7] border border-black rounded-md font-semibold text-slate-900 hover:bg-[#e4dcc3] transition"
+            >
+              <FaArrowLeft /> Volver
+            </button>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-3 px-8 py-3 bg-[#F2EDD7] border border-black rounded-md font-semibold text-slate-900 hover:bg-[#e4dcc3] transition"
+            >
+              <FaPrint /> Imprimir
+            </button>
+          </div>
         </div>
       </div>
     </div>

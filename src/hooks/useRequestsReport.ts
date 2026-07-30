@@ -1,3 +1,4 @@
+// hooks/useRequestsReport.ts
 import { useState, useEffect, useCallback } from 'react';
 import { getRequestsReport } from '../api/request.api';
 import { RequestFilters, RequestsReportResponse } from '../types/request.types';
@@ -26,15 +27,6 @@ export const useRequestsReport = () => {
     setFilters(prev => ({ ...prev, ...newFilters }));
   }, []);
 
-  const applyFilters = useCallback(() => {
-    loadReport(filters);
-  }, [loadReport, filters]);
-
-  const clearFilters = useCallback(() => {
-    setFilters({});
-    loadReport({});
-  }, [loadReport]);
-
   useEffect(() => {
     loadReport();
   }, [loadReport]);
@@ -45,8 +37,6 @@ export const useRequestsReport = () => {
     error,
     filters,
     updateFilters,
-    applyFilters,
-    clearFilters,
     reload: loadReport
   };
 };

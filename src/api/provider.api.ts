@@ -2,10 +2,10 @@ import { ProviderFilters, ProvidersReportResponse } from '../types/provider.type
 
 const MOCK_PROVIDERS: ProvidersReportResponse = {
   providers: [
-    { id: 1, name: 'Distribuidora Médica SA', email: 'contacto@distribuidora.com', address: 'Av. Principal 123', phone: '555-1234', isActive: true, createdAt: '2026-07-01' },
-    { id: 2, name: 'Laboratorios FarmaPlus', email: 'ventas@farmaplus.com', address: 'Calle Secundaria 456', phone: '555-5678', isActive: true, createdAt: '2026-07-05' },
-    { id: 3, name: 'Insumos Quirúrgicos SL', email: 'info@insumosq.com', address: 'Blvd. Industrial 789', phone: '555-9012', isActive: false, createdAt: '2026-06-15' },
-    { id: 4, name: 'Distribuidora de Equipos Médicos', email: 'ventas@equiposmed.com', address: 'Zona Franca 321', phone: '555-3456', isActive: true, createdAt: '2026-07-10' }
+    { id: 1, name: 'FarmaLias', email: 'contacto@farmalias.com', address: 'Av. Blanco Galindo 123', phone: '67676767', isActive: true, createdAt: '2026-07-01' },
+    { id: 2, name: 'Bago', email: 'ventas@bago.com', address: 'Av Petrolera 456', phone: '67676767', isActive: true, createdAt: '2026-07-05' },
+    { id: 3, name: 'Inti', email: 'info@inti.com', address: 'Av 6 de Agosto 789', phone: '76767677', isActive: false, createdAt: '2026-06-15' },
+    { id: 4, name: 'MatziMatziMatzi', email: 'ventas@equiposmed.com', address: 'Tiquipaya 321', phone: '76767676', isActive: true, createdAt: '2026-07-10' }
   ],
   summary: {
     totalProviders: 4,

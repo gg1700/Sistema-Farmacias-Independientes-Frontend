@@ -1,3 +1,4 @@
+// hooks/usePurchasesReport.ts
 import { useState, useEffect, useCallback } from 'react';
 import { getPurchasesReport } from '../api/purchase.api';
 import { PurchaseFilters, PurchasesReportResponse } from '../types/purchase.types';
@@ -26,15 +27,6 @@ export const usePurchasesReport = () => {
     setFilters(prev => ({ ...prev, ...newFilters }));
   }, []);
 
-  const applyFilters = useCallback(() => {
-    loadReport(filters);
-  }, [loadReport, filters]);
-
-  const clearFilters = useCallback(() => {
-    setFilters({});
-    loadReport({});
-  }, [loadReport]);
-
   useEffect(() => {
     loadReport();
   }, [loadReport]);
@@ -45,8 +37,6 @@ export const usePurchasesReport = () => {
     error,
     filters,
     updateFilters,
-    applyFilters,
-    clearFilters,
     reload: loadReport
   };
 };

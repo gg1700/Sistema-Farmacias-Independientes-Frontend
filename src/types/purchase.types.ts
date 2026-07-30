@@ -1,3 +1,4 @@
+// types/purchase.types.ts
 export interface Purchase {
   id: string | number;
   provider: string;
@@ -8,8 +9,8 @@ export interface Purchase {
   expirationDate?: string;
   subtotal: number;
   tax?: number;
-  total: number;
-  status: 'PENDING' | 'COMPLETED' | 'CANCELLED';
+  total?: number;
+  status?: string;
 }
 
 export interface PurchaseFilters {
@@ -17,7 +18,6 @@ export interface PurchaseFilters {
   endDate?: string;
   provider?: string;
   product?: string;
-  status?: string;
 }
 
 export interface PurchasesSummary {
