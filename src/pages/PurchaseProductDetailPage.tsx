@@ -3,8 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import IconButton from '../components/ui/IconButton';
-import SaveButton from '../components/ui/SaveButton';
-import CancelButton from '../components/ui/CancelButton';
 import AddButton from '../components/ui/AddButton';
 import Pagination from '../components/features/Pagination';
 import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
@@ -121,11 +119,6 @@ function PurchaseProductDetailPage() {
                 footer={<AddButton />}
             />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-
-            <div className={styles.bottomActions}>
-                <SaveButton onClick={handleSavePurchase} />
-                <CancelButton onClick={handleCancelPurchase} />
-            </div>
         </div>
     );
 }
