@@ -9,7 +9,7 @@ import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialSuppliersData from '../data/suppliers.json';
-import type { Supplier } from '../types/inventory';
+import type { Supplier } from '../types/Inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
