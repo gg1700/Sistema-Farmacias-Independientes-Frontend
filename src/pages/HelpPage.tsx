@@ -13,7 +13,7 @@ const styles={
 
 function Help() {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-full gap-8 p-8">
       <p className="text-gray-600 mb-6 text-lg">
         ¿En qué podemos ayudarte hoy? Encuentra guías rápidas, manuales detallados y soluciones técnicas para optimizar tu gestión farmacéutica.
       </p>

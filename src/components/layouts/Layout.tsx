@@ -4,9 +4,9 @@ import Header from './Header';
 import SidebarOptions from './Sidebar';
 
 const styles = {
-    pageContainer: "flex flex-col min-h-screen",
-    bodyContainer: "flex flex-1",
-    mainContent: "flex-1 flex flex-col",
+    pageContainer: "flex flex-col h-screen overflow-hidden",
+    bodyContainer: "flex flex-1 min-h-0",
+    mainContent: "flex-1 flex flex-col min-h-0",
     pageContent: "flex-1 p-6 bg-background",
 }
 
