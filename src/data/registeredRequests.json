@@ -1,0 +1,9 @@
+[
+  { "id": 1, "code": "SOL-001", "registrationDate": "2026-07-01", "status": "En Espera", "supplier": "Distribuidora Salud SA" },
+  { "id": 2, "code": "SOL-002", "registrationDate": "2026-07-10", "status": "Confirmada", "supplier": "Medic Import" },
+  { "id": 3, "code": "SOL-003", "registrationDate": "2026-07-15", "status": "Cancelada", "supplier": "Farma Insumos Ltda" },
+  { "id": 4, "code": "SOL-004", "registrationDate": "2026-07-17", "status": "En Espera", "supplier": "Suministros Vidal" },
+  { "id": 5, "code": "SOL-005", "registrationDate": "2026-07-19", "status": "Confirmada", "supplier": "Insumos del Valle" },
+  { "id": 6, "code": "SOL-006", "registrationDate": "2026-07-21", "status": "En Espera", "supplier": "Química Andina" },
+  { "id": 7, "code": "SOL-007", "registrationDate": "2026-07-23", "status": "Cancelada", "supplier": "Bioinsumos SRL" }
+]
