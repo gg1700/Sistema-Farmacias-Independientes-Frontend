@@ -16,4 +16,6 @@ export interface RegisterFormProps{
   inputs: InputElement[];
   actionButtonProps: ActionButtonProps;
   className: string;
+  onAddSubcategory?: () => void;
+  formRef?: React.RefObject<HTMLFormElement | null>;
 }

@@ -1,0 +1,14 @@
+export const registeredRequests = [
+    { "id": 1, "code": "SOL-001", "registrationDate": "2026-07-01", "status": "En Espera", "supplier": "Distribuidora Salud SA", "description": "Reposición de analgésicos", "products": ["Paracetamol 500mg", "Ibuprofeno 400mg"] },
+    { "id": 2, "code": "SOL-002", "registrationDate": "2026-07-10", "status": "Confirmada", "supplier": "Medic Import", "description": "Insumos de curación", "products": ["Gasas Estériles", "Vendas Elásticas"] },
+    { "id": 3, "code": "SOL-003", "registrationDate": "2026-07-15", "status": "Cancelada", "supplier": "Farma Insumos Ltda", "description": "Antibióticos urgentes", "products": ["Amoxicilina 500mg"] },
+    { "id": 4, "code": "SOL-004", "registrationDate": "2026-07-17", "status": "En Espera", "supplier": "Suministros Vidal", "description": "Higiene personal", "products": ["Jabón Antibacterial", "Shampoo Antibacterial"] },
+    { "id": 5, "code": "SOL-005", "registrationDate": "2026-07-19", "status": "Confirmada", "supplier": "Insumos del Valle", "description": "Equipos de diagnóstico", "products": ["Tensiómetro Digital", "Termómetro Digital"] },
+    { "id": 6, "code": "SOL-006", "registrationDate": "2026-07-21", "status": "En Espera", "supplier": "Química Andina", "description": "Guantes de protección", "products": ["Guantes de Nitrilo M", "Guantes de Latex L"] },
+    { "id": 7, "code": "SOL-007", "registrationDate": "2026-07-23", "status": "Cancelada", "supplier": "Bioinsumos SRL", "description": "Vitaminas y suplementos", "products": ["Multivitamínico Adulto", "Minerales Complejo B"] },
+    { "id": 8, "code": "SOL-008", "registrationDate": "2026-07-24", "status": "En Espera", "supplier": "Salud Total Import", "description": "Material de curación", "products": ["Algodón Hidrófilo"] },
+    { "id": 9, "code": "SOL-009", "registrationDate": "2026-07-25", "status": "Confirmada", "supplier": "Farmatek SRL", "description": "Cuidado dental", "products": ["Pasta Dental Fluorada", "Enjuague Bucal Antiséptico"] },
+    { "id": 10, "code": "SOL-010", "registrationDate": "2026-07-26", "status": "En Espera", "supplier": "Insumos Continental", "description": "Jeringas y equipo de inyección", "products": ["Jeringas 5ml", "Jeringas 10ml"] },
+    { "id": 11, "code": "SOL-011", "registrationDate": "2026-07-27", "status": "Cancelada", "supplier": "Grupo Médico Vital", "description": "Analgésicos generales", "products": ["Paracetamol 500mg"] },
+    { "id": 12, "code": "SOL-012", "registrationDate": "2026-07-28", "status": "Confirmada", "supplier": "Distribuidora del Norte", "description": "Equipos médicos", "products": ["Tensiómetro Digital"] }
+]
