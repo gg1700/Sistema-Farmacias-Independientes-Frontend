@@ -10,14 +10,15 @@ import Pagination from '../components/features/Pagination';
 import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
 import usePagination from '../hooks/usePagination';
 import { getStoredProducts, saveStoredProducts } from '../utils/purchaseProductStorage';
-import type { PurchaseProduct } from '../types/inventory';
+import type { PurchaseProduct } from '../types/Inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
-    bottomActions: "flex justify-center gap-4",
+    bottomActions: "flex justify-center gap-4 -mt-4",
 }
 
+const PRODUCTS_PER_PAGE = 3;
 
 function PurchaseProductDetailPage() {
     const { purchaseId } = useParams();
@@ -27,7 +28,7 @@ function PurchaseProductDetailPage() {
         purchaseId ? getStoredProducts(purchaseId) : []
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, 3);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, PRODUCTS_PER_PAGE);
 
     function handleDeleteProduct(productId: string) {
         setProducts((currentProducts) => currentProducts.filter((product) => product.id !== productId));
@@ -41,11 +42,11 @@ function PurchaseProductDetailPage() {
         if (purchaseId) {
             saveStoredProducts(purchaseId, products);
         }
-        navigate('/adquisiciones/visualizar');
+        navigate('/purchases/list');
     }
 
     function handleCancelPurchase() {
-        navigate('/adquisiciones/visualizar');
+        navigate('/purchases/list');
     }
 
     const columns: DataTableColumn<PurchaseProduct>[] = [
@@ -75,7 +76,7 @@ function PurchaseProductDetailPage() {
                 columns={columns}
                 rows={paginatedItems}
                 getRowKey={(product) => product.id}
-                itemsPerPage={3}
+                itemsPerPage={PRODUCTS_PER_PAGE}
                 footer={<AddButton />}
             />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
