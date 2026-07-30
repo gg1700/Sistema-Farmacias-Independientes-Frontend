@@ -8,6 +8,7 @@ import { Supplies } from "../types/RegisterTable.types";
 import { supplyList } from "../constants/supplies";
 import RegisterForm from "../components/features/RegisterForm";
 import RegisterTable from "../components/features/RegisterTable";
+import { supplierList } from "../constants/supplier";
 import { useModal } from "../contexts/ModalContext";
 import { SupplyRequestConfirmModal } from "../components/modals/SupplyRequestConfirmModal";
 
@@ -40,7 +41,9 @@ function RegisterSupplyRequest() {
   }
   const dropDown : DropDownProps = {
     description: "Proveedor",
-    options: ["Pedri", "Yamal", "Messi", "Mbappe"],
+    options: supplierList.map((s) => (
+        s.name
+    )),
     direction: "vertical",
     selectorStyle: "w-md"
   };
@@ -66,8 +69,8 @@ function RegisterSupplyRequest() {
   supplyList.forEach(sup => {
     const newSupply : Partial<Supplies> = {
       id: sup.id,
-      name: sup.Nom,
-      amount: sup.Cant
+      name: sup.name,
+      quantity: sup.quantity
     };
     newSupplyList.push(newSupply);
   })

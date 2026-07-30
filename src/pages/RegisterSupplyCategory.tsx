@@ -7,6 +7,7 @@ import { Supplies } from "../types/RegisterTable.types";
 import { supplyList } from "../constants/supplies";
 import RegisterForm from "../components/features/RegisterForm";
 import RegisterTable from "../components/features/RegisterTable";
+import { categoryList } from "../constants/categories";
 import { useModal } from "../contexts/ModalContext";
 import { CategoryConfirmModal } from "../components/modals/CategoryConfirmModal";
 import { SubcategoryModal } from "../components/modals/SubcategoryModal";
@@ -29,7 +30,11 @@ function RegisterSupplyCategory() {
   }
   const dropDown : DropDownProps = {
     description: "Subcategoria:",
-    options: ["Pedri", "Yamal", "Messi", "Mbappe"],
+    options: categoryList.flatMap((category) => (
+        category.subcategories.map((s) => (
+            s
+        ))
+    )),
     direction: "vertical",
     selectorStyle: "w-[320px]"
   };
@@ -47,8 +52,8 @@ function RegisterSupplyCategory() {
   supplyList.forEach(sup => {
     const newSupply : Partial<Supplies> = {
       id: sup.id,
-      name: sup.Nom,
-      amount: sup.Cant
+      name: sup.name,
+      quantity: sup.quantity
     };
     newSupplyList.push(newSupply);
   })

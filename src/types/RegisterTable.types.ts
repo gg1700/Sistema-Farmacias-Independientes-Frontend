@@ -1,7 +1,7 @@
 export interface Supplies{
   id: string;
   name: string;
-  amount: number;
+  quantity: number;
   category: string;
   subcategory: string;
   unitPrice: number;

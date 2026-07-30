@@ -8,7 +8,11 @@ import Pagination from '../components/features/Pagination';
 import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
 import usePagination from '../hooks/usePagination';
 import { getStoredProducts, saveStoredProducts } from '../utils/purchaseProductStorage';
-import type { PurchaseProduct } from '../types/Inventory';
+import type { PurchaseProduct } from '../types/inventory';
+import { useModal } from '../contexts/ModalContext';
+import { ProductConfirmationModal } from '../components/modals/ProductConfirmationModal';
+import { categoryList } from '../constants/categories';
+import { SelectOption } from '../components/modals/ProductConfirmationModal';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
@@ -22,11 +26,48 @@ function PurchaseProductDetailPage() {
     const { purchaseId } = useParams();
     const navigate = useNavigate();
 
+    const { openModal } = useModal();
+
     const [products, setProducts] = useState<PurchaseProduct[]>(
         purchaseId ? getStoredProducts(purchaseId) : []
     );
 
     const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, PRODUCTS_PER_PAGE);
+
+    function handleEditProduct(product: PurchaseProduct) {
+        const productData = {
+            nombre: product.name,
+            categoria: product.category,
+            subcategoria: product.subcategory,
+            cantidad: product.quantity,
+            precioUnitario: product.unitPrice,
+            fechaVencimiento: product.expirationDate,
+            lote: product.batch
+        };
+        const categoryOptions: SelectOption[] = categoryList.map((cat) => ({
+            value: cat.category,
+            label: cat.category
+        }));
+        const subcategoryOptions: SelectOption[] = categoryList.flatMap((cat) =>
+            cat.subcategories.map((sc) => ({
+                value: sc,
+                label: sc,
+            }))
+        );
+
+        openModal(
+            <ProductConfirmationModal
+                data={productData}
+                onSave={(updatedData) => {
+                    // Logica de guardado
+                }}
+                buttonText="Actualizar"
+                editable={true}
+                categoriaOptions={categoryOptions}
+                subcategoriaOptions={subcategoryOptions}
+            />
+        );
+    }
 
     function handleDeleteProduct(productId: string) {
         setProducts((currentProducts) => currentProducts.filter((product) => product.id !== productId));
@@ -60,8 +101,8 @@ function PurchaseProductDetailPage() {
             header: "Accion",
             render: (product) => (
                 <div className={styles.actionsCell}>
-                    <IconButton icon={<FaTrash size={18} />} label="Eliminar producto" onClick={() => handleDeleteProduct(product.id)} />
-                    <IconButton icon={<FaEdit size={18} />} label="Editar producto" />
+                    <IconButton icon={<FaTrash size={18} />} label="Eliminar producto" onClick={() => handleDeleteProduct(product.id)}/>
+                    <IconButton icon={<FaEdit size={18} />} label="Editar producto" onClick={() => handleEditProduct(product)} />
                 </div>
             ),
         },
