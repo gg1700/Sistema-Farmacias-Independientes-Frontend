@@ -1,11 +1,13 @@
 ﻿// pages/previews/ProvidersPreview/index.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUserCircle, FaClipboardCheck, FaBriefcaseMedical, FaShapes, FaCalendarAlt, FaPrint } from 'react-icons/fa';
+import { FaCalendarAlt, FaPrint } from 'react-icons/fa';
 import { mockProviders } from '../../../mocks/data';
 
 const ProvidersPreview: React.FC = () => {
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const providers = mockProviders;
 
   return (
@@ -22,17 +24,29 @@ const ProvidersPreview: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 items-end">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <span className="font-semibold text-slate-700">Fecha de Inicio</span>
+                <label htmlFor="startDate" className="font-semibold text-slate-700">Fecha de Inicio</label>
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
                   <FaCalendarAlt className="text-slate-500" />
-                  <div className="h-5 w-full rounded bg-slate-300" />
+                  <input
+                    id="startDate"
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="w-full bg-transparent outline-none text-slate-700"
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="font-semibold text-slate-700">Fecha de Fin</span>
+                <label htmlFor="endDate" className="font-semibold text-slate-700">Fecha de Fin</label>
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
                   <FaCalendarAlt className="text-slate-500" />
-                  <div className="h-5 w-full rounded bg-slate-300" />
+                  <input
+                    id="endDate"
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="w-full bg-transparent outline-none text-slate-700"
+                  />
                 </div>
               </div>
             </div>
@@ -54,7 +68,7 @@ const ProvidersPreview: React.FC = () => {
           <h3 className="text-xl font-semibold text-slate-900">Vista Previa de Impresion</h3>
           <button
             type="button"
-            onClick={() => navigate('/reporte/proveedores')}
+            onClick={() => navigate('/reports/suppliers')}
             className="inline-flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition"
           >
             <FaPrint /> Impresion
