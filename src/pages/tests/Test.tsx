@@ -1,11 +1,11 @@
 import { IoMdSave } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
-import SearchSelector from "../components/features/SearchSelector";
-import { supplyList } from "../constants/supplies";
-import RegisterTable from "../components/features/RegisterTable";
-import { DropDownProps } from "../types/DropDown.types";
-import { ActionButtonProps } from "../types/ActionButton.types";
-import { Supplies } from "../types/RegisterTable.types";
+import SearchSelector from "../../components/features/SearchSelector";
+import { supplyList } from "../../constants/supplies";
+import RegisterTable from "../../components/features/RegisterTable";
+import { DropDownProps } from "../../types/DropDown.types";
+import { ActionButtonProps } from "../../types/ActionButton.types";
+import { Supplies } from "../../types/RegisterTable.types";
 
 function Test() {
   const dropDown : DropDownProps = {

@@ -16,7 +16,12 @@ import PurchaseReport from '../pages/reports/reportPurchase/index.tsx';
 import ProvidersPreview from '../pages/previews/previewProvider/index.tsx';
 import PurchasesPreview from '../pages/previews/previewPurchase/index.tsx';
 import RequestsPreview from '../pages/previews/previewRequest/index.tsx';
-import Test from "../pages/Test";
+import Test from "../pages/tests/Test.tsx";
+import ProductConfirmationExample from "../pages/tests/ProductConfirmationExample.tsx";
+import UpdateProviderExample from "../pages/tests/UpdateProviderExample.tsx";
+import ApprovalModalExample from "../pages/tests/ApprovalExample.tsx";
+import ProductDetailModalExample from "../pages/tests/ProducDetailExample.tsx";
+import CategoryModalExample from "../pages/tests/CategoryExample.tsx";
 
 function RouterPage() {
   return (
@@ -27,7 +32,6 @@ function RouterPage() {
         <Route path="/suppliers" element={<SupplierManagment />}/>
         <Route path="/supply-requests" element={<SupplyRequestsManagment />}/>
         <Route path="/supply-categories" element={<SupplyCategoryManagment />}/>
-        <Route path="/test" element={<Test />}/>
         <Route path="reports/suppliers" element={<ProvidersReport />} />
         <Route path="reports/requests" element={<RequestReport />} />
         <Route path="reports/purchases" element={<PurchaseReport />} />
@@ -39,6 +43,14 @@ function RouterPage() {
         <Route path="inventario/categorias" element={<RegisteredCategoriesListPage />} />
         <Route path="inventario/solicitud" element={<RegisteredRequestsListPage />} />
         <Route path="proveedores/gestionar" element={<RegisteredSuppliersListPage />} />
+
+        <Route path="/test" element={<Test />}/>
+        <Route path="/modal-product-conf-test" element={<ProductConfirmationExample />}/>
+        <Route path="/modal-provider-test" element={<UpdateProviderExample />}/>
+        <Route path="/modal-approval-test" element={<ApprovalModalExample />}/>
+        <Route path="/modal-product-detail-test" element={<ProductDetailModalExample />}/>
+        <Route path="/modal-category-test" element={<CategoryModalExample />}/>
+
       </Route>
     </Routes>
   );

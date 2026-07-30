@@ -20,7 +20,7 @@ function RegisterTable({ subtitle, header, registers, pagination }: any) {
     <section className="flex flex-col justify-center items-center p-3">
       <h2 className="text-black text-center font-medium text-2xl p-3">{subtitle}</h2>
       <div className="bg-modals grid w-4xl rounded-2xl shadow-sm h-87" lang="es">  
-        <ul className="grid grid-cols-7 gap-2 text-center items-center p-2 border-b-2 border-[#ADA87F]">
+        <ul className="grid gap-2 text-center items-center p-2 border-b-2 border-[#ADA87F]" style={{ gridTemplateColumns: `repeat(${header.length}, 1fr)` }}>
           {
             header.map((h: any) => (
               <li key={`${subtitle}-${h}`} className="text-black text-center max-w-3xl font-semibold">{h}</li>
@@ -30,7 +30,7 @@ function RegisterTable({ subtitle, header, registers, pagination }: any) {
 
         {
           currentPage.map((rgtr: any) => (
-            <ul key={rgtr.id} className="grid grid-cols-7 gap-2 text-center items-center p-4 h-16">
+            <ul key={rgtr.id} className="grid gap-2 text-center items-center p-4 h-16" style={{ gridTemplateColumns: `repeat(${header.length}, 1fr)` }}>
               {
                 Object.keys(rgtr)
                   .filter(rgtrKey => (rgtrKey !== "id"))
@@ -47,7 +47,7 @@ function RegisterTable({ subtitle, header, registers, pagination }: any) {
         {
           ((remainingRegisters !== 0) && (page === totalPages)) ?
             Array.from({ length: remainingRegisters }, (_, i) => (
-              <ul key={`void-row-${subtitle}-${i}`} className="grid grid-cols-7 gap-2 text-center items-center p-4 h-16">
+              <ul key={`void-row-${subtitle}-${i}`} className="grid gap-2 text-center items-center p-4 h-16" style={{ gridTemplateColumns: `repeat(${header.length}, 1fr)` }}>
                 {
                   header.map((_: any, j: number) => (
                     <li key={`void-column-${subtitle}-${i}-${j}`} className="text-black text-center text-sm max-w-3xl p-5 font-medium truncate">
