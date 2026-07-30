@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { optionList } from "../constants/options";
 import OptionWorkSpace from "../components/features/OptionWorkSpace";
 
@@ -19,6 +20,7 @@ function SupplierManagmentPage() {
         <OptionWorkSpace options={optionList.slice(0, 3)}>
         </OptionWorkSpace>
       </section>
+      <Outlet />
     </>
   );
 }

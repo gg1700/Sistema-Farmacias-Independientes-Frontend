@@ -1,5 +1,5 @@
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
-import ActionButton from './ActionButton';
+import ActionButton from '../ui/ActionButton';
 
 const styles = {
     container: "flex items-center justify-center gap-20 p-1",

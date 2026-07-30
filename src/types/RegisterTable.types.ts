@@ -10,5 +10,10 @@ export interface Supplies{
 }
 
 export interface RegisterTableProps{
-  supplies: Supplies[];
+  subtitle: string;
+  header: string[];
+  registers: Supplies[] | Partial<Supplies>[];
+  pagination: number;
+  tableStyles?: string;
+  buttonStyles?: string;
 }
