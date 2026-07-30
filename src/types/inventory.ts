@@ -1,4 +1,3 @@
-
 export interface Supplier {
     id: number;
     code: string;
@@ -7,6 +6,7 @@ export interface Supplier {
     phone: string;
     email: string;
     isActive: boolean;
+    registrationDate: string;
 }
 
 export interface RegisteredPurchase {
@@ -25,6 +25,8 @@ export interface RegisteredRequest {
     registrationDate: string;
     status: RequestStatus;
     supplier: string;
+    description: string;
+    products: string[];
 }
 
 export interface RegisteredCategory {
@@ -42,4 +44,15 @@ export interface PurchaseProduct {
     unitPrice: number;
     expirationDate: string;
     batch: string;
+}
+
+export interface PurchaseLineItem {
+    id: string;
+    purchaseId: number;
+    supplier: string;
+    date: string;
+    productName: string;
+    quantity: number;
+    unitPrice: number;
+    expirationDate: string;
 }

@@ -2,32 +2,72 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
-import IconButton from '../components/features/IconButton';
-import SaveButton from '../components/features/SaveButton';
-import CancelButton from '../components/features/CancelButton';
-import AddButton from '../components/features/AddButton';
+import IconButton from '../components/ui/IconButton';
+import AddButton from '../components/ui/AddButton';
 import Pagination from '../components/features/Pagination';
 import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
 import usePagination from '../hooks/usePagination';
 import { getStoredProducts, saveStoredProducts } from '../utils/purchaseProductStorage';
 import type { PurchaseProduct } from '../types/inventory';
+import { useModal } from '../contexts/ModalContext';
+import { ProductConfirmationModal } from '../components/modals/ProductConfirmationModal';
+import { categoryList } from '../constants/categories';
+import { SelectOption } from '../components/modals/ProductConfirmationModal';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
-    bottomActions: "flex justify-center gap-4",
+    bottomActions: "flex justify-center gap-4 -mt-4",
 }
 
+const PRODUCTS_PER_PAGE = 3;
 
 function PurchaseProductDetailPage() {
     const { purchaseId } = useParams();
     const navigate = useNavigate();
 
+    const { openModal } = useModal();
+
     const [products, setProducts] = useState<PurchaseProduct[]>(
         purchaseId ? getStoredProducts(purchaseId) : []
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, 3);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, PRODUCTS_PER_PAGE);
+
+    function handleEditProduct(product: PurchaseProduct) {
+        const productData = {
+            nombre: product.name,
+            categoria: product.category,
+            subcategoria: product.subcategory,
+            cantidad: product.quantity,
+            precioUnitario: product.unitPrice,
+            fechaVencimiento: product.expirationDate,
+            lote: product.batch
+        };
+        const categoryOptions: SelectOption[] = categoryList.map((cat) => ({
+            value: cat.category,
+            label: cat.category
+        }));
+        const subcategoryOptions: SelectOption[] = categoryList.flatMap((cat) =>
+            cat.subcategories.map((sc) => ({
+                value: sc,
+                label: sc,
+            }))
+        );
+
+        openModal(
+            <ProductConfirmationModal
+                data={productData}
+                onSave={(updatedData) => {
+                    // Logica de guardado
+                }}
+                buttonText="Actualizar"
+                editable={true}
+                categoriaOptions={categoryOptions}
+                subcategoriaOptions={subcategoryOptions}
+            />
+        );
+    }
 
     function handleDeleteProduct(productId: string) {
         setProducts((currentProducts) => currentProducts.filter((product) => product.id !== productId));
@@ -41,11 +81,11 @@ function PurchaseProductDetailPage() {
         if (purchaseId) {
             saveStoredProducts(purchaseId, products);
         }
-        navigate('/adquisiciones/visualizar');
+        navigate('/purchases/list');
     }
 
     function handleCancelPurchase() {
-        navigate('/adquisiciones/visualizar');
+        navigate('/purchases/list');
     }
 
     const columns: DataTableColumn<PurchaseProduct>[] = [
@@ -61,8 +101,8 @@ function PurchaseProductDetailPage() {
             header: "Accion",
             render: (product) => (
                 <div className={styles.actionsCell}>
-                    <IconButton icon={<FaTrash size={18} />} label="Eliminar producto" onClick={() => handleDeleteProduct(product.id)} />
-                    <IconButton icon={<FaEdit size={18} />} label="Editar producto" />
+                    <IconButton icon={<FaTrash size={18} />} label="Eliminar producto" onClick={() => handleDeleteProduct(product.id)}/>
+                    <IconButton icon={<FaEdit size={18} />} label="Editar producto" onClick={() => handleEditProduct(product)} />
                 </div>
             ),
         },
@@ -75,15 +115,10 @@ function PurchaseProductDetailPage() {
                 columns={columns}
                 rows={paginatedItems}
                 getRowKey={(product) => product.id}
-                itemsPerPage={3}
+                itemsPerPage={PRODUCTS_PER_PAGE}
                 footer={<AddButton />}
             />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-
-            <div className={styles.bottomActions}>
-                <SaveButton onClick={handleSavePurchase} />
-                <CancelButton onClick={handleCancelPurchase} />
-            </div>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 const styles = {
-    section: "flex flex-col justify-center items-center p-1 w-full",
+    section: "flex flex-col justify-center items-center p-3 w-full",
     title: "text-black text-center font-medium text-2xl p-3",
     cardWrapper: "w-full flex justify-center overflow-x-auto",
     card: "bg-modals grid w-full max-w-5xl rounded-2xl shadow-sm max-h-[420px] overflow-y-auto",
@@ -11,7 +11,7 @@ const styles = {
     bodyCell: "text-black text-center text-sm font-medium line-clamp-2",
     fillerCell: "text-black text-center text-sm p-5 font-medium truncate",
     emptyMessage: "text-center text-fields py-10 col-span-full",
-    footerWrapper: "flex justify-center p-3",
+    footerWrapper: "flex justify-center py-3",
 }
 
 export interface DataTableColumn<TRow> {
@@ -79,11 +79,7 @@ function DataTable<TRow>({
                         <p className={styles.emptyMessage}>{emptyMessage}</p>
                     )}
 
-                    {footer && (
-                        <div className={styles.footerWrapper}>
-                            {footer}
-                        </div>
-                    )}
+                    {footer && <div className={styles.footerWrapper}>{footer}</div>}
                 </div>
             </div>
         </section>

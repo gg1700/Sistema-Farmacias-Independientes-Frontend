@@ -1,4 +1,4 @@
-import type { RequestStatus } from '../../types/inventory';
+import type { RequestStatus } from '../../types/Inventory';
 
 const styleByStatus: Record<RequestStatus, string> = {
     'En Espera': "text-fields",

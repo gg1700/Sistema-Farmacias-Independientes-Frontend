@@ -8,26 +8,36 @@
   --color-background: #FFFFFF;
   --color-modals: #E0DAB2;
   --color-text: #333333;
-  --color-fields: #666666;
-  --color-sidebar: #004D33;
-  --color-good: #27AE60;
-  --color-danger: #E74C3C;
-  --font-first: 'Inter', sans-serif;
-  --font-second: 'Encode Sans Semi Condensed', sans-serif;
+  --color-fields: #666666; 
+  --color-sidebar: #004D33;     
+  --color-good: #27AE60;     
+  --color-danger: #E74C3C;       
+  --font-first: 'Inter', sans-serif;       
+  --font-second: 'Encode Sans Semi Condensed', sans-serif; 
 }
 
-body {
-  font-family: var(--font-first);
-  color: var(--color-text);
-  background-color: var(--color-background);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-second);
-}
-
-input[type='date']::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-  appearance: none;
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .printable-area,
+    .printable-area * {
+        visibility: visible;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    .printable-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .print-scroll-area {
+        max-height: none !important;
+        overflow: visible !important;
+    }
 }

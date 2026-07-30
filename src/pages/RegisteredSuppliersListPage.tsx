@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { FaEdit, FaBan } from 'react-icons/fa';
-import TextFilterField from '../components/features/TextFilterField';
+import TextFilterField from '../components/ui/TextFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import StatusDot from '../components/features/StatusDot';
-import IconButton from '../components/features/IconButton';
+import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialSuppliersData from '../data/suppliers.json';
 import type { Supplier } from '../types/inventory';
+import { ModalUpdateProvider } from '../components/modals/UpdateProviderModal';
+import { useModal } from '../contexts/ModalContext';
+import { supplierList } from '../constants/supplier';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
 }
 
-
 function RegisteredSuppliersListPage() {
     const [suppliers, setSuppliers] = useState<Supplier[]>(initialSuppliersData as Supplier[]);
     const [codeFilter, setCodeFilter] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [appliedNameFilter, setAppliedNameFilter] = useState('');
-    
+
+    const { openModal } = useModal();
+
     const filteredSuppliers = useFilteredData(
         suppliers,
         (supplier) =>
@@ -37,9 +41,24 @@ function RegisteredSuppliersListPage() {
         setAppliedNameFilter(nameInput);
     }
 
-    function handleEditSupplier(supplier: Supplier) {
-        console.log('Editar proveedor', supplier);
-    }
+    const handleOpenModal = (supplier: Supplier): void => {
+        const formatedSupplier = {
+            nombre: supplier.name,
+            direccion: supplier.address,
+            telefono: supplier.phone,
+            correo: supplier.email
+        }
+
+        openModal(
+            <ModalUpdateProvider
+                data={formatedSupplier}
+                onSave={(updatedData) => {
+                    // logica de guardado
+                }}
+                buttonText="Actualizar"
+            />
+        );
+    };
 
     function handleToggleSupplierActive(supplierId: number) {
         setSuppliers((currentSuppliers) =>
@@ -60,7 +79,7 @@ function RegisteredSuppliersListPage() {
             header: "Acciones",
             render: (supplier) => (
                 <div className={styles.actionsCell}>
-                    <IconButton icon={<FaEdit size={18} />} label="Editar proveedor" onClick={() => handleEditSupplier(supplier)} />
+                    <IconButton icon={<FaEdit size={18} />} label="Editar proveedor" onClick={() => handleOpenModal(supplier)} />
                     <IconButton
                         icon={<FaBan size={18} />}
                         label={supplier.isActive ? "Desactivar proveedor" : "Activar proveedor"}
