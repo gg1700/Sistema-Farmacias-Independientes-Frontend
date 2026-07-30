@@ -39,6 +39,7 @@ function RouterPage() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        <Route index element={<MainMenu />} />
         <Route path="help" element={<Help />} />
         <Route path="purchases/register/:purchaseId?" element={<PurchaseProductDetailPage />} />
         <Route path="purchases/list" element={<RegisteredPurchasesListPage />} />
