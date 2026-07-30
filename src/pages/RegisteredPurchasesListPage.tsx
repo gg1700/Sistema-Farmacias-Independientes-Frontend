@@ -5,7 +5,7 @@ import DateFilterField from '../components/features/DateFilterField';
 import SelectFilterField from '../components/features/SelectFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
-import IconButton from '../components/features/IconButton';
+import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';

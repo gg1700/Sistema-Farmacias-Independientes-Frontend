@@ -17,7 +17,16 @@ import MainMenu from "../pages/MainMenu";
 import SupplierManagment from "../pages/SupplierManagment";
 import SupplyRequestsManagment from "../pages/SupplyRequestsManagement";
 import SupplyCategoryManagment from "../pages/SupplyCategoryManagment";
-import Test from "../pages/Test";
+import RegisterSupply from "../pages/RegisterSupply";
+import RegisterSupplier from "../pages/RegisterSupplier";
+import RegisterSupplyRequest from "../pages/RegisterSupplyRequest";
+import RegisterSupplyCategory from "../pages/RegisterSupplyCategory";
+import Test from "../pages/tests/Test.tsx";
+import ProductConfirmationExample from "../pages/tests/ProductConfirmationExample.tsx";
+import UpdateProviderExample from "../pages/tests/UpdateProviderExample.tsx";
+import ApprovalModalExample from "../pages/tests/ApprovalExample.tsx";
+import ProductDetailModalExample from "../pages/tests/ProducDetailExample.tsx";
+import CategoryModalExample from "../pages/tests/CategoryExample.tsx";
 
 // import ProvidersReport from '../pages/reports/reportProvider/index.tsx';
 // import RequestReport from '../pages/reports/reportRequest/index.tsx';
@@ -42,11 +51,15 @@ function RouterPage() {
         <Route path="reports/purchases/detail" element={<PurchasesReportPage />} />
         <Route path="reports/suppliers/detail" element={<SuppliersReportPage />} />
         <Route path="reports/requests/detail" element={<RequestsReportPage />} />
+
         <Route path="menu" element={<MainMenu />} />
-        <Route path="/suppliers" element={<SupplierManagment />} />
-        <Route path="/supply-requests" element={<SupplyRequestsManagment />} />
-        <Route path="/supply-categories" element={<SupplyCategoryManagment />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="suppliers" element={<SupplierManagment />} />
+        <Route path="suppliers/register" element={<RegisterSupplier />} />
+        <Route path="supply-requests" element={<SupplyRequestsManagment />} />
+        <Route path="supply-requests/register" element={<RegisterSupplyRequest />} />
+        <Route path="supply-categories" element={<SupplyCategoryManagment />} />
+        <Route path="supply-categories/register" element={<RegisterSupplyCategory />} />
+        <Route path="supply/register" element={<RegisterSupply />} />
 
         {/* <Route path="reports/suppliers" element={<ProvidersReport />} /> */}
         {/* <Route path="reports/requests" element={<RequestReport />} /> */}
@@ -54,6 +67,13 @@ function RouterPage() {
         {/* <Route path="preview/suppliers" element={<ProvidersPreview />} /> */}
         {/* <Route path="preview/purchases" element={<PurchasesPreview />} /> */}
         {/* <Route path="preview/requests" element={<RequestsPreview />} /> */}
+
+        <Route path="/test" element={<Test />} />
+        <Route path="/modal-product-conf-test" element={<ProductConfirmationExample />} />
+        <Route path="/modal-provider-test" element={<UpdateProviderExample />} />
+        <Route path="/modal-approval-test" element={<ApprovalModalExample />} />
+        <Route path="/modal-product-detail-test" element={<ProductDetailModalExample />} />
+        <Route path="/modal-category-test" element={<CategoryModalExample />} />
       </Route>
     </Routes>
   );

@@ -4,7 +4,7 @@ import TextFilterField from '../components/features/TextFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import StatusDot from '../components/features/StatusDot';
-import IconButton from '../components/features/IconButton';
+import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';

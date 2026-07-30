@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
-import IconButton from '../components/features/IconButton';
+import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import usePagination from '../hooks/usePagination';
 import initialCategoriesData from '../data/registeredCategories.json';
