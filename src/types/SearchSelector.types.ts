@@ -1,4 +1,4 @@
-import { DropDownProps } from "./DropDown.types";
+import { DropDownProps } from "./Dropdown.types";
 import { ActionButtonProps } from "./ActionButton.types";
 
 export interface SearchSelectorProps{
