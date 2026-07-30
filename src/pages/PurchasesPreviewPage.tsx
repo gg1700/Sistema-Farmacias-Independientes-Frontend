@@ -17,10 +17,10 @@ const styles = {
     supplierRow: "flex",
     totalsWrapper: "w-full flex justify-center",
     totalsBar: "w-full max-w-5xl flex justify-end text-text font-bold text-lg px-4",
-    printWrapper: "w-full flex justify-end pr-8 -mt-10",
+    printWrapper: "w-full flex justify-end pr-8 -mt-14",
 }
 
-const LINE_ITEMS_PER_PAGE = 3;
+const LINE_ITEMS_PER_PAGE = 2;
 
 function PurchasesPreviewPage() {
     const navigate = useNavigate();

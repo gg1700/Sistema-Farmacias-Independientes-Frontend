@@ -36,13 +36,15 @@ function RegisterSupply() {
   const testHeader = ["Nom.", "Cant.", "Cat.", "Subcat.", "P. Unit.", "Fec. Vto.", "Lote"];
 
   return (
-    <section className="flex flex-col justify-center items-center h-full gap-3">
+    <section className="flex flex-col justify-center items-center w-full h-full gap-3 px-4">
       <SearchSelector subtitle="Datos de Compra" dropDownProps={dropDown} actionButtonProps={actionButton}>
       </SearchSelector>
 
-      <RegisterTable tableStyles="w-5xl h-87" buttonStyles="gap-20" subtitle={"Productos Comprados"} header={testHeader} 
-      registers={newSupplyList} pagination={4}>
-      </RegisterTable>
+      <div className="w-full overflow-x-auto flex justify-center">
+        <RegisterTable tableStyles="w-full max-w-5xl h-87" buttonStyles="gap-6 sm:gap-12 md:gap-20" subtitle={"Productos Comprados"} header={testHeader}
+        registers={newSupplyList} pagination={2}>
+        </RegisterTable>
+      </div>
     </section>
   );
 }

@@ -11,10 +11,26 @@ const styles = {
   button_second: "bg-background p-3 w-full sm:w-40 font-semibold text-primary border border-primary flex gap-1 items-center justify-center",
 }
 
+const SUPPORT_EMAIL = "losvikingosnoruegos@gmail.com";
+const SUPPORT_PHONE_DISPLAY = "+591 68598564";
+const EMAIL_SUBJECT = "Soporte tecnico - Sistema de Gestion de Farmacias";
+const EMAIL_BODY = "Hola equipo de soporte,\n\nNecesito ayuda con lo siguiente:\n\n";
+
 function Help() {
+  function handleContactByEmail() {
+    const subject = encodeURIComponent(EMAIL_SUBJECT);
+    const body = encodeURIComponent(EMAIL_BODY);
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${SUPPORT_EMAIL}&su=${subject}&body=${body}`;
+    window.open(gmailComposeUrl, '_blank');
+  }
+
+  function handleCallSupport() {
+    alert(`Se esta llamando al numero de contacto ${SUPPORT_PHONE_DISPLAY}`);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-6xl mx-auto gap-8 p-4 md:p-8 overflow-x-hidden">
-      <p className="text-gray-600 mb-6 text-lg">
+      <p className="text-gray-600 mb-1 text-lg -mt-7">
         ¿En qué podemos ayudarte hoy? Encuentra guías rápidas, manuales detallados y soluciones técnicas para optimizar tu gestión farmacéutica.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
@@ -46,11 +62,11 @@ function Help() {
           <p className={styles.text}>Nuestro equipo de soporte técnico está disponible de Lunes a Viernes (8:00 - 18:00).</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-          <button className={styles.button_first}>
+          <button type="button" onClick={handleContactByEmail} className={styles.button_first}>
             <BsChatText size={30} />
             <p>Contactar por correo</p>
           </button>
-          <button className={styles.button_second}>
+          <button type="button" onClick={handleCallSupport} className={styles.button_second}>
             <BsTelephone size={30} />
             <p>Llamar a Soporte</p>
           </button>

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { MdContactPhone, MdFactCheck, MdMedicalServices, MdCategory } from "react-icons/md";
 
 const styles = {
@@ -7,25 +8,41 @@ const styles = {
     text: "text-center font-semibold text-first py-1.5 text-sm",
 }
 
+interface HeaderShortcut {
+    label: string;
+    icon: React.ElementType;
+    path: string | null;
+}
+
+const shortcuts: HeaderShortcut[] = [
+    { label: "Ver Proveedores Registrados", icon: MdContactPhone, path: "/suppliers/manage" },
+    { label: "Solicitudes de Insumos", icon: MdFactCheck, path: "/inventory/requests" },
+    { label: "Ver Existencias", icon: MdMedicalServices, path: "/purchases/list" },
+    { label: "Categorias de Insumos", icon: MdCategory, path: "/inventory/categories" },
+]
+
 function Header() {
+    const navigate = useNavigate();
+
+    function handleNavigate(path: string | null) {
+        if (path) {
+            navigate(path);
+        }
+    }
+
     return (
         <div className={styles.container}>
-            <div className={styles.div}>
-                <button className={styles.button}><MdContactPhone size={32} /></button>
-                <p className={styles.text}>Ver Proveedores Registrados</p>
-            </div>
-            <div className={styles.div}>
-                <button className={styles.button}><MdFactCheck size={32} /></button>
-                <p className={styles.text}>Solicitudes de Insumos</p>
-            </div>
-            <div className={styles.div}>
-                <button className={styles.button}><MdMedicalServices size={32} /></button>
-                <p className={styles.text}>Ver Existencias</p>
-            </div>
-            <div className={styles.div}>
-                <button className={styles.button}><MdCategory size={32} /></button>
-                <p className={styles.text}>Categorias de Insumos</p>
-            </div>
+            {shortcuts.map((shortcut) => {
+                const Icon = shortcut.icon;
+                return (
+                    <div key={shortcut.label} className={styles.div} onClick={() => handleNavigate(shortcut.path)} title={shortcut.label}>
+                        <button type="button" className={styles.button} disabled={!shortcut.path} title={shortcut.label}>
+                            <Icon size={32} />
+                        </button>
+                        <p className={styles.text}>{shortcut.label}</p>
+                    </div>
+                );
+            })}
         </div>
     );
 }
