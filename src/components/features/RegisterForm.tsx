@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { RegisterFormProps } from "../../types/RegisterForm.types";
 import { FaPlus } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
@@ -7,13 +8,21 @@ import DropDown from "../ui/Dropdown";
 import TextField from "../ui/TextField";
 import TextArea from "../ui/TextArea";
 
-function RegisterForm({ subtitle, inputs, actionButtonProps, className }: RegisterFormProps) {
-  const { bgColor, hoverColor } = actionButtonProps;
+function RegisterForm({ subtitle, inputs, actionButtonProps, className, onAddSubcategory, formRef }: RegisterFormProps) {
+  const { bgColor, hoverColor, clickAction } = actionButtonProps;
+  const internalFormRef = useRef<HTMLFormElement | null>(null);
+
+  const setFormRef = (el: HTMLFormElement | null) => {
+    internalFormRef.current = el;
+    if (formRef) {
+      (formRef as React.MutableRefObject<HTMLFormElement | null>).current = el;
+    }
+  };
 
   return (
     <section className="flex flex-col justify-center items-center">
       <h2 className="text-black text-center font-medium text-2xl py-5">{subtitle}</h2>
-      <form className={`bg-modals flex flex-col justify-center p-3 ${className} rounded-xl shadow-sm`}>
+      <form ref={setFormRef} className={`bg-modals flex flex-col justify-center p-3 ${className} rounded-xl shadow-sm`}>
         {
           inputs.map((inp: InputElement) => (
             (inp.inputType.includes("dropdown")) ?
@@ -23,7 +32,7 @@ function RegisterForm({ subtitle, inputs, actionButtonProps, className }: Regist
                   options={inp.dropDownProps!.options} direction={inp.dropDownProps!.direction}>
                   </DropDown>
                   <ActionButton dimentions="w-52" padding="px-5 py-2" bgColor={"#ADA87F"} hoverColor={"#41B589"} IconName={FaPlus} 
-                  action={"Añadir Subcategoria"}>
+                  action={"Añadir Subcategoria"} clickAction={onAddSubcategory}>
                   </ActionButton>
                 </div>
               :
@@ -44,9 +53,9 @@ function RegisterForm({ subtitle, inputs, actionButtonProps, className }: Regist
         }
       </form>
       <div className="flex items-center justify-center px-3 py-5 gap-8">
-        <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={FaPlus} action={"Añadir"} typeButton={"submit"}>
+        <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={FaPlus} action={"Añadir"} typeButton={"submit"} clickAction={clickAction}>
         </ActionButton>
-        <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={IoCloseSharp} action={"Cancelar"}>
+        <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={IoCloseSharp} action={"Cancelar"} clickAction={() => internalFormRef.current?.reset()}>
         </ActionButton>
       </div>
     </section>

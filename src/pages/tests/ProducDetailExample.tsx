@@ -1,7 +1,7 @@
 import React from 'react';
 import { useModal } from '../../contexts/ModalContext';
 import { ProductDetailModal } from '../../components/modals/ProductDetailModal';
-
+//
 const ProductDetailModalExample: React.FC = () => {
   const { openModal } = useModal();
 
