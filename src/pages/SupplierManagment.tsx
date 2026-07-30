@@ -16,7 +16,7 @@ function SupplierManagmentPage() {
       </OptionButton>
       */}
 
-      <section className="flex flex-col justify-center items-center gap-8 h-full p-8">
+      <section className="flex flex-col justify-center items-center gap-8 h-full p-0">
         <OptionWorkSpace options={optionList.slice(0, 3)}>
         </OptionWorkSpace>
       </section>
