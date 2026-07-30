@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFileAlt, FaTrash } from 'react-icons/fa';
-import DateFilterField from '../components/features/DateFilterField';
-import SelectFilterField from '../components/features/SelectFilterField';
+import DateFilterField from '../components/ui/DateFilterField';
+import SelectFilterField from '../components/ui/SelectFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import IconButton from '../components/ui/IconButton';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaEdit, FaBan } from 'react-icons/fa';
-import TextFilterField from '../components/features/TextFilterField';
+import TextFilterField from '../components/ui/TextFilterField';
 import FiltersWrapper from '../components/features/FiltersWrapper';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import StatusDot from '../components/features/StatusDot';
