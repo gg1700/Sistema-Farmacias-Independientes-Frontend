@@ -16,8 +16,8 @@ const styles = {
     datesRow: "flex gap-6",
     supplierRow: "flex",
     totalsWrapper: "w-full flex justify-center",
-    totalsBar: "w-full max-w-5xl flex justify-end text-text font-bold text-lg px-4",
-    printWrapper: "w-full flex justify-end pr-8 -mt-14",
+    totalsBar: "w-full max-w-5xl flex justify-end text-text font-bold text-lg px-4 -mt-15",
+    printWrapper: "w-full flex justify-end pr-8 -mt-11",
 }
 
 const LINE_ITEMS_PER_PAGE = 2;

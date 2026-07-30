@@ -1,6 +1,5 @@
-const styles = {
-    button: "flex items-center gap-2 bg-modals border border-fields/30 rounded-md px-5 py-1.5 font-semibold text-text",
-}
+import { RiAddLine } from 'react-icons/ri';
+import ActionButton from '../ui/ActionButton';
 
 interface AddButtonProps {
     label?: string;
@@ -9,10 +8,13 @@ interface AddButtonProps {
 
 function AddButton({ label = "Añadir", onClick }: AddButtonProps) {
     return (
-        <button type="button" onClick={onClick} className={styles.button}>
-            <span>+</span>
-            {label}
-        </button>
+        <ActionButton
+            bgColor="#E0DAB2"
+            hoverColor="#82d9b6"
+            IconName={RiAddLine}
+            action={label}
+            clickAction={onClick}
+        />
     );
 }
 
