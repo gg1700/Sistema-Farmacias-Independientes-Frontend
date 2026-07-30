@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { BiSolidPackage } from "react-icons/bi";
 import { FaShoppingCart, FaBoxes, FaTruck, FaQuestionCircle } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
 
@@ -33,6 +34,9 @@ const menuItemStyles = {
     SubMenuExpandIcon: {
         color: 'var(--color-background)',
     },
+    MenuItem: {
+        hover: 'hover:underline hover:scale-105 transition-transform'
+    }
 }
 
 const helpMenuItemStyles = {
@@ -47,6 +51,7 @@ const helpMenuItemStyles = {
     },
     icon: {
         color: 'var(--color-background)',
+        exit: 'hover:rotate-90'
     },
 }
 
@@ -82,19 +87,19 @@ function SidebarOptions() {
                         open={openSubMenu === 'adquisiciones'}
                         onOpenChange={(isOpen) => handleSubMenuToggle('adquisiciones', isOpen)}
                     >
-                        <MenuItem icon={<BulletPoint />}> Registro </MenuItem>
-                        <MenuItem icon={<BulletPoint />}> Visualizar </MenuItem>
-                        <MenuItem icon={<BulletPoint />}> Reporte </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Registro </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Visualizar </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Reporte </MenuItem>
                     </SubMenu>
 
                     <SubMenu
                         label="Inventario"
-                        icon={<FaBoxes size={18} />}
+                        icon={<BiSolidPackage size={18} />}
                         open={openSubMenu === 'inventario'}
                         onOpenChange={(isOpen) => handleSubMenuToggle('inventario', isOpen)}
                     >
-                        <MenuItem icon={<BulletPoint />}> Categorias </MenuItem>
-                        <MenuItem icon={<BulletPoint />}> Solicitud </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Categorias </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Solicitud </MenuItem>
                     </SubMenu>
 
                     <SubMenu
@@ -103,14 +108,14 @@ function SidebarOptions() {
                         open={openSubMenu === 'proveedores'}
                         onOpenChange={(isOpen) => handleSubMenuToggle('proveedores', isOpen)}
                     >
-                        <MenuItem icon={<BulletPoint />}> Gestionar </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<BulletPoint />}> Gestionar </MenuItem>
                     </SubMenu>
                 </Menu>
 
                 <div className={styles.helpContainer}>
                     <Menu menuItemStyles={helpMenuItemStyles}>
-                        <MenuItem icon={<FaQuestionCircle size={18} />} component={<Link to="help" />}> Ayuda </MenuItem>
-                        <MenuItem icon={<FaXmark size={18} />}> Volver Atras </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<FaQuestionCircle size={18} />} component={<Link to="help" />}> Ayuda </MenuItem>
+                        <MenuItem className={menuItemStyles.MenuItem.hover} icon={<FaXmark className={helpMenuItemStyles.icon.exit} size={18} />}> Volver Atras </MenuItem>
                     </Menu>
                 </div>
             </div>

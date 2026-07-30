@@ -6,13 +6,13 @@ function ActionButton({ bgColor, hoverColor, IconName, action, clickAction }: Ac
 
   return (
     <button className={`flex items-center justify-center h-6 w-44 gap-2.5 px-5 py-4 m-2 rounded-lg 
-    border border-black hover:scale-105 transition-transform`}
+    border border-black hover:scale-105 hover:cursor-pointer transition-transform`}
     style={{ backgroundColor: hover ? hoverColor : bgColor }}
     onMouseEnter={() => setHover(true)}
     onMouseLeave={() => setHover(false)}
     onClick={clickAction}>
-      <IconName size={20} color={"#000000"}></IconName>
-      <label className="text-black text-center font-medium">{action}</label>
+      <IconName size={20} color={"#000000"} className={"hover:cursor-pointer"}></IconName>
+      <label className="text-black text-center font-medium hover:cursor-pointer">{action}</label>
     </button>
   );
 }
