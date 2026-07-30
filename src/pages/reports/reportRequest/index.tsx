@@ -4,93 +4,91 @@ import { FaArrowLeft, FaPrint } from 'react-icons/fa';
 import { useRequestsReport } from '../../../hooks/useRequestsReport';
 
 const RequestsReport: React.FC = () => {
-  const { data, loading, error, filters, updateFilters } = useRequestsReport();
+  const { data, loading, error, filters } = useRequestsReport();
+  const [responsible, setResponsible] = useState('');
 
   if (error) {
-    return <div className="text-red-600 p-4">{error}</div>;
+    return <div className="text-danger p-4">{error}</div>;
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="bg-white border border-black rounded-lg shadow-sm">
-        <div className="px-8 py-8">
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row justify-between gap-8 border-b border-black/10 pb-8 mb-8">
-            <div className="flex items-center gap-6">
-              <div className="w-24 h-24 rounded-full border border-black bg-[#EEF4EE] flex items-center justify-center text-center text-sm font-bold text-[#0C6441] leading-tight">
-                Farmacia<br />Angélica
-              </div>
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-600">Reporte de Solicitudes</p>
-                <h1 className="text-3xl font-bold text-slate-900 mt-2">Detalle de Solicitudes de Proveedor</h1>
-              </div>
+    <div className="p-6 max-w-7xl mx-auto bg-background font-first">
+      <div className="bg-background border border-text rounded-lg shadow-sm">
+        <div className="px-8 pt-1 pb-8">
+          <div className="flex justify-between items-start mb-2">
+            <div className="w-20 h-20 rounded-full border border-text bg-secondary flex items-center justify-center text-center text-xs font-bold text-primary leading-tight">
+              Farmacia<br />Angélica
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full sm:w-auto">
-              <div>
-                <p className="text-sm font-semibold text-slate-700">Pagina</p>
-                <div className="mt-2 px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[48px] flex items-center">
-                  <span className="text-slate-400">{filters.startDate || "__/__/__"}</span>
-                </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-fields">Pagina</span>
+                <div className="h-7 w-20 rounded-md bg-secondary" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-700">Fecha</p>
-                <div className="mt-2 px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[48px] flex items-center">
-                  <span className="text-slate-400">{filters.endDate || "Fecha"}</span>
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-fields">Fecha</span>
+                <div className="h-7 w-20 rounded-md bg-secondary" />
               </div>
             </div>
           </div>
 
-          {/* Filtros de fecha */}
-          <div className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4 items-center">
-              <span className="font-semibold text-slate-800">De</span>
-              <div className="px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[52px] flex items-center">
-                <span className="text-slate-400">{filters.startDate || "__/__/__"}</span>
+          <div className="text-center mb-3">
+            <h1 className="text-2xl font-bold text-text">Detalle de Solicitudes de Proveedor</h1>
+          </div>
+
+          <div className="flex justify-center mb-3">
+            <div className="flex items-center gap-3">
+              <span className="font-semibold text-text">De</span>
+              <div className="px-3 py-1.5 border border-secondary rounded-md bg-background text-text min-h-[36px] flex items-center">
+                <span className="text-sm text-fields">{filters.startDate || '__/__/__'}</span>
               </div>
-              <span className="font-semibold text-slate-800">a</span>
-              <div className="px-4 py-3 border border-slate-300 rounded-md bg-white text-slate-800 min-h-[52px] flex items-center">
-                <span className="text-slate-400">{filters.endDate || "__/__/__"}</span>
+              <span className="font-semibold text-text">a</span>
+              <div className="px-3 py-1.5 border border-secondary rounded-md bg-background text-text min-h-[36px] flex items-center">
+                <span className="text-sm text-fields">{filters.endDate || '__/__/__'}</span>
               </div>
             </div>
           </div>
 
-          {/* Tabla */}
-          <div className="overflow-x-auto border border-black rounded-md">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-semibold text-text">Responsable</span>
+            <div className="px-3 py-1.5 border border-secondary rounded-md bg-background text-text min-h-[36px] flex-1 max-w-xs">
+              <span className="text-sm text-fields">{responsible || 'Responsable'}</span>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto border border-black rounded-md mb-5">
             <table className="min-w-full border-collapse">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">No.</th>
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Proveedor</th>
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Fecha de Registro</th>
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Descripción</th>
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Estado</th>
-                  <th className="px-5 py-3 border border-black text-left text-sm font-semibold">Productos</th>
+                <tr>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">No.</th>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">Proveedor</th>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">Fecha de Registro</th>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">Descripción</th>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">Estado</th>
+                  <th className="px-4 py-2 border border-black text-left text-sm font-semibold text-black">Productos</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={6} className="py-10 text-center text-slate-500">Cargando...</td>
+                    <td colSpan={6} className="py-8 text-center text-black">Cargando...</td>
                   </tr>
                 ) : !data || data.requests.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-10 text-center text-slate-500">No hay datos</td>
+                    <td colSpan={6} className="py-8 text-center text-black">No hay datos</td>
                   </tr>
                 ) : (
                   data?.requests?.map((request, index) => (
-                    <tr key={request.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-5 py-4 border border-black text-sm">{index + 1}</td>
-                      <td className="px-5 py-4 border border-black text-sm">{request.provider || request.requester}</td>
-                      <td className="px-5 py-4 border border-black text-sm">{request.requestDate}</td>
-                      <td className="px-5 py-4 border border-black text-sm">{request.description || request.product}</td>
-                      <td className="px-5 py-4 border border-black text-sm">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-                          ${request.status === 'En Espera' || request.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' : ''}
-                          ${request.status === 'Confirmada' || request.status === 'APPROVED' ? 'bg-green-100 text-green-800' : ''}
-                          ${request.status === 'Rechazada' || request.status === 'REJECTED' ? 'bg-red-100 text-red-800' : ''}
-                          ${request.status === 'FULFILLED' ? 'bg-blue-100 text-blue-800' : ''}
+                    <tr key={request.id}>
+                      <td className="px-4 py-2 border border-black text-sm text-black">{index + 1}</td>
+                      <td className="px-4 py-2 border border-black text-sm text-black">{request.provider || request.requester}</td>
+                      <td className="px-4 py-2 border border-black text-sm text-black">{request.requestDate}</td>
+                      <td className="px-4 py-2 border border-black text-sm text-black">{request.description || request.product}</td>
+                      <td className="px-4 py-2 border border-black text-sm text-black">
+                        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium
+                          ${request.status === 'En Espera' || request.status === 'PENDING' ? 'bg-modals text-black' : ''}
+                          ${request.status === 'Confirmada' || request.status === 'APPROVED' ? 'bg-secondary text-black' : ''}
+                          ${request.status === 'Rechazada' || request.status === 'REJECTED' ? 'bg-danger text-black' : ''}
+                          ${request.status === 'FULFILLED' ? 'bg-primary text-black' : ''}
                         `}>
                           {request.status === 'En Espera' || request.status === 'PENDING' ? 'En Espera' :
                            request.status === 'Confirmada' || request.status === 'APPROVED' ? 'Confirmada' :
@@ -98,7 +96,7 @@ const RequestsReport: React.FC = () => {
                            request.status || 'En Espera'}
                         </span>
                       </td>
-                      <td className="px-5 py-4 border border-black text-sm">{request.quantity || '-'}</td>
+                      <td className="px-4 py-2 border border-black text-sm text-black">{request.quantity || '-'}</td>
                     </tr>
                   ))
                 )}
@@ -106,21 +104,20 @@ const RequestsReport: React.FC = () => {
             </table>
           </div>
 
-          {/* Botones */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 pb-8">
+          <div className="flex justify-center gap-6">
             <button
               type="button"
               onClick={() => window.history.back()}
-              className="inline-flex items-center gap-3 px-8 py-3 bg-[#F2EDD7] border border-black rounded-md font-semibold text-slate-900 hover:bg-[#e4dcc3] transition"
+              className="inline-flex items-center gap-2 px-6 py-2 bg-modals border border-text rounded-md font-semibold text-text hover:bg-modals/90 transition text-sm"
             >
-              <FaArrowLeft /> Volver
+              <FaArrowLeft className="text-sm" /> Volver
             </button>
             <button
               type="button"
               onClick={() => window.print()}
-              className="inline-flex items-center gap-3 px-8 py-3 bg-[#F2EDD7] border border-black rounded-md font-semibold text-slate-900 hover:bg-[#e4dcc3] transition"
+              className="inline-flex items-center gap-2 px-6 py-2 bg-modals border border-text rounded-md font-semibold text-text hover:bg-modals/90 transition text-sm"
             >
-              <FaPrint /> Imprimir
+              <FaPrint className="text-sm" /> Imprimir
             </button>
           </div>
         </div>

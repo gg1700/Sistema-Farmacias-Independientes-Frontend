@@ -1,7 +1,7 @@
 // pages/previews/PurchasesPreview/index.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendarAlt, FaPrint } from 'react-icons/fa';
+import { FaCalendarAlt, FaChevronDown, FaPrint } from 'react-icons/fa';
 import { Purchase } from '../../../types/purchase.types';
 
 const mockPurchases: Purchase[] = [
@@ -20,6 +20,12 @@ const PurchasesPreview: React.FC = () => {
   const [provider, setProvider] = useState('');
   const [status, setStatus] = useState('Todos');
 
+  const openDatePicker = (inputId: string) => {
+    const input = document.getElementById(inputId) as HTMLInputElement | null;
+    input?.focus();
+    input?.showPicker?.();
+  };
+
   const filteredPurchases = mockPurchases.filter((purchase) => {
     if (startDate && purchase.date < startDate) return false;
     if (endDate && purchase.date > endDate) return false;
@@ -29,114 +35,116 @@ const PurchasesPreview: React.FC = () => {
   });
 
   return (
-    <div className="p-6 max-w-7xl mx-auto bg-white">
-      <div className="bg-[#F4F4F4] rounded-3xl p-6 mb-6">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900">Filtrado y Vista</h1>
-            <h2 className="text-2xl font-semibold text-slate-900">Previa de Compras</h2>
+    <div className="p-8 max-w-7xl mx-auto bg-background font-first">
+      <h1 className="text-4xl font-extrabold text-text leading-tight">Filtrado y Vista</h1>
+      <h2 className="text-4xl font-extrabold text-text leading-tight mb-8">Previa de Compras</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 mb-10">
+        <div className="flex items-center gap-4">
+          <label htmlFor="startDate" className="text-2xl font-bold text-text whitespace-nowrap">
+            Fecha de Inicio
+          </label>
+          <div className="flex-1 relative">
+            <input
+              id="startDate"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="w-full h-12 rounded-md bg-secondary px-4 text-fields outline-none"
+            />
           </div>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-sm p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 items-end">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="startDate" className="font-semibold text-slate-700">Fecha de Inicio</label>
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
-                  <FaCalendarAlt className="text-slate-500" />
-                  <input
-                    id="startDate"
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full bg-transparent outline-none text-slate-700"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="endDate" className="font-semibold text-slate-700">Fecha de Fin</label>
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-slate-100 border border-slate-200">
-                  <FaCalendarAlt className="text-slate-500" />
-                  <input
-                    id="endDate"
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full bg-transparent outline-none text-slate-700"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold text-slate-700">Proveedor</span>
-              <input
-                type="text"
-                value={provider}
-                onChange={(e) => setProvider(e.target.value)}
-                placeholder="Buscar proveedor"
-                className="w-full rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-slate-700 outline-none"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold text-slate-700">Estado</span>
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                className="w-full rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-slate-700"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-[#F2EDD7] rounded-3xl border border-slate-200 p-6 mb-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-          <h3 className="text-xl font-semibold text-slate-900">Vista Previa de Impresion</h3>
           <button
             type="button"
-            onClick={() => navigate('/reports/purchases')}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition"
+            onClick={() => openDatePicker('startDate')}
+            className="flex items-center justify-center h-11 w-11 rounded-full bg-primary text-background shrink-0"
           >
-            <FaPrint /> Impresion
+            <FaCalendarAlt />
           </button>
         </div>
 
+        <div className="flex items-center gap-4">
+          <label htmlFor="endDate" className="text-2xl font-bold text-text whitespace-nowrap">
+            Fecha de Fin
+          </label>
+          <div className="flex-1 relative">
+            <input
+              id="endDate"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="w-full h-12 rounded-md bg-secondary px-4 text-fields outline-none"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => openDatePicker('endDate')}
+            className="flex items-center justify-center h-11 w-11 rounded-full bg-primary text-background shrink-0"
+          >
+            <FaCalendarAlt />
+          </button>
+        </div>
+
+        <div className="flex items-center gap-4 md:col-span-1">
+          <label htmlFor="provider" className="text-2xl font-bold text-text whitespace-nowrap">
+            Proveedor
+          </label>
+          <div className="flex-1 relative">
+            <input
+              id="provider"
+              type="text"
+              value={provider}
+              onChange={(e) => setProvider(e.target.value)}
+              placeholder="Buscar proveedor"
+              className="w-full h-12 rounded-md bg-secondary px-4 text-fields outline-none"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <h3 className="text-3xl font-extrabold text-center text-text mb-6">Vista Previa de Impresion</h3>
+
+      <div className="rounded-3xl p-2 mb-4 border border-black">
         <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse bg-[#F7F2DD] rounded-3xl overflow-hidden">
+          <table className="min-w-full border-collapse">
             <thead>
-              <tr className="text-left text-slate-900">
-                <th className="px-6 py-4 border border-slate-300 rounded-tl-3xl">No.</th>
-                <th className="px-6 py-4 border border-slate-300">Proveedor</th>
-                <th className="px-6 py-4 border border-slate-300">Fecha</th>
-                <th className="px-6 py-4 border border-slate-300">Producto</th>
-                <th className="px-6 py-4 border border-slate-300">Cantidad</th>
-                <th className="px-6 py-4 border border-slate-300">Precio Unitario</th>
-                <th className="px-6 py-4 border border-slate-300">Fecha de Vencimiento</th>
-                <th className="px-6 py-4 border border-slate-300 rounded-tr-3xl">Subtotal</th>
+              <tr className="text-left text-black border-b border-black">
+                <th className="px-6 py-4 font-bold">No.</th>
+                <th className="px-6 py-4 font-bold">Proveedor</th>
+                <th className="px-6 py-4 font-bold">Fecha</th>
+                <th className="px-6 py-4 font-bold">Producto</th>
+                <th className="px-6 py-4 font-bold">Cantidad</th>
+                <th className="px-6 py-4 font-bold">Precio Unitario</th>
+                <th className="px-6 py-4 font-bold">Fecha de Vencimiento</th>
+                <th className="px-6 py-4 font-bold">Subtotal</th>
               </tr>
             </thead>
             <tbody>
               {filteredPurchases.map((purchase, index) => (
-                <tr key={purchase.id} className="odd:bg-[#F7F2DD] even:bg-[#EFE8C9]">
-                  <td className="px-6 py-4 border border-slate-300">{index + 1}</td>
-                  <td className="px-6 py-4 border border-slate-300">{purchase.provider}</td>
-                  <td className="px-6 py-4 border border-slate-300">{purchase.date}</td>
-                  <td className="px-6 py-4 border border-slate-300">{purchase.product}</td>
-                  <td className="px-6 py-4 border border-slate-300">{purchase.quantity}</td>
-                  <td className="px-6 py-4 border border-slate-300">${purchase.unitPrice.toFixed(2)}</td>
-                  <td className="px-6 py-4 border border-slate-300">{purchase.expirationDate || '-'}</td>
-                  <td className="px-6 py-4 border border-slate-300">${purchase.subtotal.toFixed(2)}</td>
+                <tr key={purchase.id} className="border-b border-black last:border-b-0">
+                  <td className="px-6 py-4 text-black">{index + 1}</td>
+                  <td className="px-6 py-4 text-black">{purchase.provider}</td>
+                  <td className="px-6 py-4 text-black">{purchase.date}</td>
+                  <td className="px-6 py-4 text-black">{purchase.product}</td>
+                  <td className="px-6 py-4 text-black">{purchase.quantity}</td>
+                  <td className="px-6 py-4 text-black">${purchase.unitPrice.toFixed(2)}</td>
+                  <td className="px-6 py-4 text-black">{purchase.expirationDate || '-'}</td>
+                  <td className="px-6 py-4 text-black">${purchase.subtotal.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={() => navigate('/reports/purchases')}
+          className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-modals text-text font-semibold shadow hover:bg-modals/90 transition"
+        >
+          <FaPrint /> Impresion
+        </button>
       </div>
     </div>
   );
