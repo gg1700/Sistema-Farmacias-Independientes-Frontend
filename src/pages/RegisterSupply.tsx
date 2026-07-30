@@ -5,11 +5,14 @@ import RegisterTable from "../components/features/RegisterTable";
 import { DropDownProps } from "../types/Dropdown.types";
 import { ActionButtonProps } from "../types/ActionButton.types";
 import { Supplies } from "../types/RegisterTable.types";
+import { supplierList } from "../constants/supplier";
 
 function RegisterSupply() {
   const dropDown : DropDownProps = {
     description: "Proveedor",
-    options: ["Pedri", "Yamal", "Messi", "Mbappe"]
+    options: supplierList.map((s) => (
+      s.name
+    ))
   };
   const actionButton : ActionButtonProps = {
     bgColor: "#ADA87F",
@@ -22,13 +25,13 @@ function RegisterSupply() {
   supplyList.forEach(sup => {
     const newSupply : Supplies = {
       id: sup.id,
-      name: sup.Nom,
-      amount: sup.Cant,
-      category: sup.Cat,
-      subcategory: sup.Subcat,
-      unitPrice: sup["P.Unit"],
-      expirationDate: sup["Fec. Vto."],
-      batch: sup.Lote
+      name: sup.name,
+      quantity: sup.quantity,
+      category: sup.category,
+      subcategory: sup.subcategory,
+      unitPrice: sup.unitPrice,
+      expirationDate: sup.expirationDate,
+      batch: sup.batch
     };
     newSupplyList.push(newSupply);
   })
@@ -41,8 +44,8 @@ function RegisterSupply() {
       </SearchSelector>
 
       <div className="w-full overflow-x-auto flex justify-center">
-        <RegisterTable tableStyles="w-full max-w-5xl h-87" buttonStyles="gap-6 sm:gap-12 md:gap-20" subtitle={"Productos Comprados"} header={testHeader}
-        registers={newSupplyList} pagination={2}>
+        <RegisterTable tableStyles="w-256 max-w-5xl h-87" buttonStyles="gap-6 sm:gap-12 md:gap-20" subtitle={"Productos Comprados"} header={testHeader}
+        registers={newSupplyList} pagination={4}>
         </RegisterTable>
       </div>
     </section>
