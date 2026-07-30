@@ -1,14 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/layouts/Layout';
-import Help from './pages/helpPage'
+import { BrowserRouter } from "react-router-dom";
+import RouterPage from "./routes/Index.routes";
+
 function App() {
-  return(
+  return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-        <Route path="help" element={<Help/>}></Route>
-         </Route>
-      </Routes>
+      <RouterPage />
     </BrowserRouter>
   );
 }
