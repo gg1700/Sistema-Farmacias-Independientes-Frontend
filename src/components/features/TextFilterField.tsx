@@ -4,7 +4,7 @@ const styles = {
     fieldContainer: "flex items-center gap-2",
     label: "text-text font-semibold",
     input: "border border-fields/40 rounded px-3 py-1 bg-background text-text",
-    searchButton: "text-primary",
+    searchButton: "text-text",
 }
 
 interface TextFilterFieldProps {

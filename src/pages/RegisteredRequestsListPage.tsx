@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { FaFileAlt, FaCheckCircle } from 'react-icons/fa';
-import TextFilterField from '../components/ui/TextFilterField';
-import DateFilterField from '../components/ui/DateFilterField';
-import DataTable, { type DataTableColumn } from '../components/ui/DataTable';
-import RequestStatusBadge from '../components/ui/RequestStatusBadge';
-import IconButton from '../components/ui/IconButton';
-import Pagination from '../components/ui/Pagination';
+import TextFilterField from '../components/features/TextFilterField';
+import DateFilterField from '../components/features/DateFilterField';
+import FiltersWrapper from '../components/features/FiltersWrapper';
+import DataTable, { type DataTableColumn } from '../components/features/DataTable';
+import RequestStatusBadge from '../components/features/RequestStatusBadge';
+import IconButton from '../components/features/IconButton';
+import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialRequestsData from '../data/registeredRequests.json';
@@ -13,13 +14,9 @@ import type { RegisteredRequest } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
-    filtersColumn: "flex flex-col gap-3",
-    sectionTitle: "text-center text-lg font-semibold text-text",
-    contentCard: "bg-modals rounded-lg p-6 flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
 }
 
-const REQUESTS_PER_PAGE = 4;
 
 function RegisteredRequestsListPage() {
     const [requests, setRequests] = useState<RegisteredRequest[]>(initialRequestsData as RegisteredRequest[]);
@@ -37,7 +34,7 @@ function RegisteredRequestsListPage() {
         [appliedCodeFilter, dateFilter]
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredRequests, REQUESTS_PER_PAGE);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredRequests, 3);
 
     function handleSearchByCode() {
         setAppliedCodeFilter(codeInput);
@@ -75,17 +72,19 @@ function RegisteredRequestsListPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.filtersColumn}>
+            <FiltersWrapper>
                 <TextFilterField label="Codigo de Solicitud" value={codeInput} onChange={setCodeInput} onSearch={handleSearchByCode} />
                 <DateFilterField label="Fecha de Registro" value={dateFilter} onChange={setDateFilter} />
-            </div>
+            </FiltersWrapper>
 
-            <h2 className={styles.sectionTitle}>Solicitudes Registradas</h2>
-
-            <div className={styles.contentCard}>
-                <DataTable columns={columns} rows={paginatedItems} getRowKey={(request) => request.id} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-            </div>
+            <DataTable
+                title="Solicitudes Registradas"
+                columns={columns}
+                rows={paginatedItems}
+                getRowKey={(request) => request.id}
+                itemsPerPage={3}
+            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>
     );
 }

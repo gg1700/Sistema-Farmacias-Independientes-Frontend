@@ -1,25 +1,22 @@
 import { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import DataTable, { type DataTableColumn } from '../components/ui/DataTable';
-import IconButton from '../components/ui/IconButton';
-import Pagination from '../components/ui/Pagination';
+import DataTable, { type DataTableColumn } from '../components/features/DataTable';
+import IconButton from '../components/features/IconButton';
+import Pagination from '../components/features/Pagination';
 import usePagination from '../hooks/usePagination';
 import initialCategoriesData from '../data/registeredCategories.json';
 import type { RegisteredCategory } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
-    sectionTitle: "text-center text-lg font-semibold text-text",
-    contentCard: "bg-modals rounded-lg p-6 flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
 }
 
-const CATEGORIES_PER_PAGE = 4;
 
 function RegisteredCategoriesListPage() {
     const [categories, setCategories] = useState<RegisteredCategory[]>(initialCategoriesData as RegisteredCategory[]);
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(categories, CATEGORIES_PER_PAGE);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(categories, 4);
 
     function handleEditCategory(category: RegisteredCategory) {
         console.log('Editar categoria', category);
@@ -46,12 +43,14 @@ function RegisteredCategoriesListPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <h2 className={styles.sectionTitle}>Categorias Registradas</h2>
-
-            <div className={styles.contentCard}>
-                <DataTable columns={columns} rows={paginatedItems} getRowKey={(category) => category.id} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-            </div>
+            <DataTable
+                title="Categorias Registradas"
+                columns={columns}
+                rows={paginatedItems}
+                getRowKey={(category) => category.id}
+                itemsPerPage={4}
+            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>
     );
 }

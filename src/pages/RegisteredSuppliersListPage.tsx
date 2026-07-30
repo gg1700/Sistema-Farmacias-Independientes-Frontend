@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { FaEdit, FaBan } from 'react-icons/fa';
-import TextFilterField from '../components/ui/TextFilterField';
-import DataTable, { type DataTableColumn } from '../components/ui/DataTable';
-import StatusDot from '../components/ui/StatusDot';
-import IconButton from '../components/ui/IconButton';
-import Pagination from '../components/ui/Pagination';
+import TextFilterField from '../components/features/TextFilterField';
+import FiltersWrapper from '../components/features/FiltersWrapper';
+import DataTable, { type DataTableColumn } from '../components/features/DataTable';
+import StatusDot from '../components/features/StatusDot';
+import IconButton from '../components/features/IconButton';
+import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialSuppliersData from '../data/suppliers.json';
@@ -12,22 +13,16 @@ import type { Supplier } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
-    filtersColumn: "flex flex-col gap-3",
-    sectionTitle: "text-center text-lg font-semibold text-text",
-    contentCard: "bg-modals rounded-lg p-6 flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
 }
 
-const SUPPLIERS_PER_PAGE = 4;
 
 function RegisteredSuppliersListPage() {
     const [suppliers, setSuppliers] = useState<Supplier[]>(initialSuppliersData as Supplier[]);
-
     const [codeFilter, setCodeFilter] = useState('');
-
     const [nameInput, setNameInput] = useState('');
     const [appliedNameFilter, setAppliedNameFilter] = useState('');
-
+    
     const filteredSuppliers = useFilteredData(
         suppliers,
         (supplier) =>
@@ -36,7 +31,7 @@ function RegisteredSuppliersListPage() {
         [codeFilter, appliedNameFilter]
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredSuppliers, SUPPLIERS_PER_PAGE);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredSuppliers, 3);
 
     function handleSearchByName() {
         setAppliedNameFilter(nameInput);
@@ -78,17 +73,19 @@ function RegisteredSuppliersListPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.filtersColumn}>
+            <FiltersWrapper>
                 <TextFilterField label="Codigo de Proveedor" value={codeFilter} onChange={setCodeFilter} />
                 <TextFilterField label="Nombre" value={nameInput} onChange={setNameInput} onSearch={handleSearchByName} />
-            </div>
+            </FiltersWrapper>
 
-            <h2 className={styles.sectionTitle}>Proveedores Registrados</h2>
-
-            <div className={styles.contentCard}>
-                <DataTable columns={columns} rows={paginatedItems} getRowKey={(supplier) => supplier.id} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-            </div>
+            <DataTable
+                title="Proveedores Registrados"
+                columns={columns}
+                rows={paginatedItems}
+                getRowKey={(supplier) => supplier.id}
+                itemsPerPage={3}
+            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>
     );
 }

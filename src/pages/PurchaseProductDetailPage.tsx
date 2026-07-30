@@ -1,27 +1,23 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import DataTable, { type DataTableColumn } from '../components/ui/DataTable';
-import IconButton from '../components/ui/IconButton';
-import SaveButton from '../components/ui/SaveButton';
-import CancelButton from '../components/ui/CancelButton';
-import AddButton from '../components/ui/AddButton';
-import Pagination from '../components/ui/Pagination';
-import ExpirationDateBadge from '../components/ui/ExpirationDateBadge';
+import DataTable, { type DataTableColumn } from '../components/features/DataTable';
+import IconButton from '../components/features/IconButton';
+import SaveButton from '../components/features/SaveButton';
+import CancelButton from '../components/features/CancelButton';
+import AddButton from '../components/features/AddButton';
+import Pagination from '../components/features/Pagination';
+import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
 import usePagination from '../hooks/usePagination';
 import { getStoredProducts, saveStoredProducts } from '../utils/purchaseProductStorage';
 import type { PurchaseProduct } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
-    sectionTitle: "text-center text-lg font-semibold text-text",
-    contentCard: "bg-modals rounded-lg p-6 flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
-    addButtonWrapper: "flex justify-center",
     bottomActions: "flex justify-center gap-4",
 }
 
-const PRODUCTS_PER_PAGE = 4;
 
 function PurchaseProductDetailPage() {
     const { purchaseId } = useParams();
@@ -31,7 +27,7 @@ function PurchaseProductDetailPage() {
         purchaseId ? getStoredProducts(purchaseId) : []
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, PRODUCTS_PER_PAGE);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(products, 3);
 
     function handleDeleteProduct(productId: string) {
         setProducts((currentProducts) => currentProducts.filter((product) => product.id !== productId));
@@ -74,16 +70,15 @@ function PurchaseProductDetailPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <h2 className={styles.sectionTitle}>Datos de Productos</h2>
-
-            <div className={styles.contentCard}>
-                <DataTable columns={columns} rows={paginatedItems} getRowKey={(product) => product.id} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-
-                <div className={styles.addButtonWrapper}>
-                    <AddButton />
-                </div>
-            </div>
+            <DataTable
+                title="Datos de Productos"
+                columns={columns}
+                rows={paginatedItems}
+                getRowKey={(product) => product.id}
+                itemsPerPage={3}
+                footer={<AddButton />}
+            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
 
             <div className={styles.bottomActions}>
                 <SaveButton onClick={handleSavePurchase} />

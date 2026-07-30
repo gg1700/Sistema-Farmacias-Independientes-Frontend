@@ -5,6 +5,7 @@ const styles = {
     fieldContainer: "flex items-center gap-2",
     label: "text-text font-semibold",
     input: "border border-fields/40 rounded px-3 py-1 bg-background text-text",
+    calendarButton: "text-text",
 }
 
 interface DateFilterFieldProps {
@@ -30,8 +31,9 @@ function DateFilterField({ label, value, onChange }: DateFilterFieldProps) {
                 onChange={(event) => onChange(event.target.value)}
                 className={styles.input}
             />
+            <button type="button" onClick={handleCalendarClick} aria-label={`Abrir calendario de ${label}`} className={styles.calendarButton}>
                 <FaRegCalendarAlt size={18} />
-
+            </button>
         </div>
     );
 }

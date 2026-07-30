@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFileAlt, FaTrash } from 'react-icons/fa';
-import DateFilterField from '../components/ui/DateFilterField';
-import SelectFilterField from '../components/ui/SelectFilterField';
-import DataTable, { type DataTableColumn } from '../components/ui/DataTable';
-import IconButton from '../components/ui/IconButton';
-import Pagination from '../components/ui/Pagination';
+import DateFilterField from '../components/features/DateFilterField';
+import SelectFilterField from '../components/features/SelectFilterField';
+import FiltersWrapper from '../components/features/FiltersWrapper';
+import DataTable, { type DataTableColumn } from '../components/features/DataTable';
+import IconButton from '../components/features/IconButton';
+import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
 import initialPurchasesData from '../data/registeredPurchases.json';
@@ -13,15 +14,12 @@ import type { RegisteredPurchase } from '../types/inventory';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
-    filtersColumn: "flex flex-col gap-3",
     datesRow: "flex gap-6",
     supplierRow: "flex",
-    sectionTitle: "text-center text-lg font-semibold text-text",
-    contentCard: "bg-modals rounded-lg p-6 flex flex-col gap-4",
     actionsCell: "flex gap-3 justify-center",
 }
 
-const PURCHASES_PER_PAGE = 4;
+
 
 function RegisteredPurchasesListPage() {
     const [purchases, setPurchases] = useState<RegisteredPurchase[]>(initialPurchasesData as RegisteredPurchase[]);
@@ -45,7 +43,7 @@ function RegisteredPurchasesListPage() {
         [startDate, endDate, supplierFilter]
     );
 
-    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredPurchases, PURCHASES_PER_PAGE);
+    const { currentPage, totalPages, paginatedItems, goToPage } = usePagination(filteredPurchases,3);
 
     function handleDeletePurchase(purchaseId: number) {
         setPurchases((currentPurchases) => currentPurchases.filter((purchase) => purchase.id !== purchaseId));
@@ -72,7 +70,7 @@ function RegisteredPurchasesListPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.filtersColumn}>
+            <FiltersWrapper>
                 <div className={styles.datesRow}>
                     <DateFilterField label="Fecha de Inicio" value={startDate} onChange={setStartDate} />
                     <DateFilterField label="Fecha Fin" value={endDate} onChange={setEndDate} />
@@ -80,14 +78,16 @@ function RegisteredPurchasesListPage() {
                 <div className={styles.supplierRow}>
                     <SelectFilterField label="Nombre de Proveedor" value={supplierFilter} options={supplierNames} onChange={setSupplierFilter} />
                 </div>
-            </div>
+            </FiltersWrapper>
 
-            <h2 className={styles.sectionTitle}>Compras Registradas</h2>
-
-            <div className={styles.contentCard}>
-                <DataTable columns={columns} rows={paginatedItems} getRowKey={(purchase) => purchase.id} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
-            </div>
+            <DataTable
+                title="Compras Registradas"
+                columns={columns}
+                rows={paginatedItems}
+                getRowKey={(purchase) => purchase.id}
+                itemsPerPage={3}
+            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>
     );
 }
