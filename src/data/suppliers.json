@@ -1,0 +1,9 @@
+[
+  { "id": 1, "code": "PRV-001", "name": "Distribuidora Salud SA", "address": "Av. Central 123", "phone": "8888-1234", "email": "contacto@saludsa.com", "isActive": true },
+  { "id": 2, "code": "PRV-002", "name": "Farma Insumos Ltda", "address": "Calle 45 #67", "phone": "8888-5678", "email": "ventas@farmainsumos.com", "isActive": false },
+  { "id": 3, "code": "PRV-003", "name": "Medic Import", "address": "Zona Industrial Lote 8", "phone": "8888-9012", "email": "info@medicimport.com", "isActive": true },
+  { "id": 4, "code": "PRV-004", "name": "Suministros Vidal", "address": "Barrio Norte 45", "phone": "8888-3344", "email": "contacto@vidalsum.com", "isActive": true },
+  { "id": 5, "code": "PRV-005", "name": "Insumos del Valle", "address": "Ruta 5 Km 12", "phone": "8888-7788", "email": "ventas@delvalle.com", "isActive": false },
+  { "id": 6, "code": "PRV-006", "name": "Química Andina", "address": "Zona Franca Lote 3", "phone": "8888-9911", "email": "info@quimicaandina.com", "isActive": true },
+  { "id": 7, "code": "PRV-007", "name": "Bioinsumos SRL", "address": "Av. Libertad 890", "phone": "8888-2233", "email": "ventas@bioinsumos.com", "isActive": true }
+]

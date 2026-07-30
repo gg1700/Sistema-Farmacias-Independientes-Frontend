@@ -1,0 +1,14 @@
+[
+  { "id": 1, "supplier": "Distribuidora Salud SA", "registrationDate": "2026-06-12", "responsible": "Ana Martínez", "total": 1520.50 },
+  { "id": 2, "supplier": "Farma Insumos Ltda", "registrationDate": "2026-06-20", "responsible": "Carlos Ruiz", "total": 890.00 },
+  { "id": 3, "supplier": "Medic Import", "registrationDate": "2026-07-05", "responsible": "Ana Martínez", "total": 2310.75 },
+  { "id": 4, "supplier": "Distribuidora Salud SA", "registrationDate": "2026-07-08", "responsible": "Luis Pérez", "total": 640.20 },
+  { "id": 5, "supplier": "Farma Insumos Ltda", "registrationDate": "2026-07-11", "responsible": "Carlos Ruiz", "total": 1120.00 },
+  { "id": 6, "supplier": "Medic Import", "registrationDate": "2026-07-14", "responsible": "Ana Martínez", "total": 3050.90 },
+  { "id": 7, "supplier": "Distribuidora Salud SA", "registrationDate": "2026-07-16", "responsible": "Luis Pérez", "total": 780.35 },
+  { "id": 8, "supplier": "Farma Insumos Ltda", "registrationDate": "2026-07-18", "responsible": "Carlos Ruiz", "total": 995.60 },
+  { "id": 9, "supplier": "Medic Import", "registrationDate": "2026-07-20", "responsible": "Ana Martínez", "total": 1780.00 },
+  { "id": 10, "supplier": "Distribuidora Salud SA", "registrationDate": "2026-07-22", "responsible": "Luis Pérez", "total": 460.15 },
+  { "id": 11, "supplier": "Farma Insumos Ltda", "registrationDate": "2026-07-24", "responsible": "Carlos Ruiz", "total": 2200.40 },
+  { "id": 12, "supplier": "Medic Import", "registrationDate": "2026-07-27", "responsible": "Ana Martínez", "total": 1330.25 }
+]

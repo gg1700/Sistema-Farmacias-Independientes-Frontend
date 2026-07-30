@@ -1,5 +1,5 @@
 import DropDown from "../ui/DropDown";
-import ActionButton from "../ui/ActionButton";
+import ActionButton from "./ActionButton";
 import { SearchSelectorProps } from "../../types/SearchSelector.types";
 
 function SearchSelector({ subtitle, dropDownProps, actionButtonProps }: SearchSelectorProps) {
