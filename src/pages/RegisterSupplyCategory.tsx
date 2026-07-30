@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { FaPlus } from "react-icons/fa";
 import { DropDownProps } from "../types/Dropdown.types";
 import { TextFieldProps } from "../types/TextField.types";
@@ -6,13 +7,25 @@ import { Supplies } from "../types/RegisterTable.types";
 import { supplyList } from "../constants/supplies";
 import RegisterForm from "../components/features/RegisterForm";
 import RegisterTable from "../components/features/RegisterTable";
+import { useModal } from "../contexts/ModalContext";
+import { CategoryConfirmModal } from "../components/modals/CategoryConfirmModal";
+import { SubcategoryModal } from "../components/modals/SubcategoryModal";
 
 function RegisterSupplyCategory() {
+  const { openModal } = useModal();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const actionButton = {
     bgColor: "#E0DAB2",
     hoverColor: "#82d9b6",
     IconName: FaPlus,
-    action: "action"
+    action: "action",
+    clickAction: () => openModal(
+      <CategoryConfirmModal
+        onConfirm={() => {
+          console.log('Categoría confirmada');
+        }}
+      />
+    ),
   }
   const dropDown : DropDownProps = {
     description: "Subcategoria:",
@@ -44,7 +57,9 @@ function RegisterSupplyCategory() {
 
   return (
     <section className="flex items-center justify-center gap-x-30">
-      <RegisterForm className="items-start w-172" subtitle={"Datos de Categoria"} inputs={inputs} actionButtonProps={actionButton}>
+      <RegisterForm className="items-start w-172" subtitle={"Datos de Categoria"} inputs={inputs} actionButtonProps={actionButton}
+        formRef={formRef}
+        onAddSubcategory={() => openModal(<SubcategoryModal />)}>
       </RegisterForm>
 
       <RegisterTable tableStyles="w-lg h-110" buttonStyles="gap-12" subtitle={"Categorias Existentes"} header={testHeader} 

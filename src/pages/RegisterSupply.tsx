@@ -5,8 +5,11 @@ import RegisterTable from "../components/features/RegisterTable";
 import { DropDownProps } from "../types/Dropdown.types";
 import { ActionButtonProps } from "../types/ActionButton.types";
 import { Supplies } from "../types/RegisterTable.types";
+import { useModal } from "../contexts/ModalContext";
+import { ProductConfirmationModal } from "../components/modals/ProductConfirmationModal";
 
 function RegisterSupply() {
+  const { openModal } = useModal();
   const dropDown : DropDownProps = {
     description: "Proveedor",
     options: ["Pedri", "Yamal", "Messi", "Mbappe"]
@@ -15,7 +18,25 @@ function RegisterSupply() {
     bgColor: "#ADA87F",
     hoverColor: "#41B589",
     IconName: FaPlus,
-    action: "Añadir"
+    action: "Añadir",
+    clickAction: () => openModal(
+      <ProductConfirmationModal
+        data={{
+          nombre: '',
+          categoria: '',
+          subcategoria: '',
+          cantidad: '',
+          precioUnitario: '',
+          fechaVencimiento: '',
+          lote: '',
+        }}
+        editable={true}
+        buttonText="Guardar"
+        onSave={(data) => {
+          console.log('Producto guardado:', data);
+        }}
+      />
+    ),
   };
 
   const newSupplyList : Supplies[] = [];

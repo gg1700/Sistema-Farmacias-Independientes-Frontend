@@ -9,8 +9,11 @@ import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
-import initialRequestsData from '../data/registeredRequests.json';
 import type { RegisteredRequest } from '../types/Inventory';
+import { registeredRequests } from '../constants/requests';
+import { useModal } from '../contexts/ModalContext';
+import { ApprovalModal } from '../components/modals/ApprovalModal';
+import { ProductDetailModal } from '../components/modals/ProductDetailModal';
 
 const styles = {
     pageContainer: "flex flex-col gap-4",
@@ -19,7 +22,8 @@ const styles = {
 
 
 function RegisteredRequestsListPage() {
-    const [requests, setRequests] = useState<RegisteredRequest[]>(initialRequestsData as RegisteredRequest[]);
+    const [requests, setRequests] = useState<RegisteredRequest[]>(registeredRequests as RegisteredRequest[]);
+    const { openModal } = useModal();
 
     const [codeInput, setCodeInput] = useState('');
     const [appliedCodeFilter, setAppliedCodeFilter] = useState('');
@@ -41,14 +45,42 @@ function RegisteredRequestsListPage() {
     }
 
     function handleViewRequest(request: RegisteredRequest) {
-        console.log('Ver solicitud', request);
+        openModal(
+            <ProductDetailModal
+                description={request.description}
+                products={request.products.map((name, i) => ({
+                    numero: i + 1,
+                    nombre: name,
+                    cantidad: 1,
+                }))}
+            />
+        );
     }
 
-    function handleConfirmRequest(requestId: number) {
-        setRequests((currentRequests) =>
-            currentRequests.map((request) =>
-                request.id === requestId ? { ...request, status: 'Confirmada' } : request
-            )
+    function handleApprovalRequest(request: RegisteredRequest) {
+        const statusMap: Record<string, 'cancelled' | 'completed' | null> = {
+            'Cancelada': 'cancelled',
+            'Confirmada': 'completed',
+            'En Espera': null,
+        };
+
+        openModal(
+            <ApprovalModal
+                currentStatus={statusMap[request.status] ?? null}
+                onSave={(newStatus) => {
+                    const reverseMap: Record<string, 'Cancelada' | 'Confirmada'> = {
+                        'cancelled': 'Cancelada',
+                        'completed': 'Confirmada',
+                    };
+                    setRequests((current) =>
+                        current.map((r) =>
+                            r.id === request.id
+                                ? { ...r, status: reverseMap[newStatus] }
+                                : r
+                        )
+                    );
+                }}
+            />
         );
     }
 
@@ -63,7 +95,7 @@ function RegisteredRequestsListPage() {
                 <div className={styles.actionsCell}>
                     <IconButton icon={<FaFileAlt size={18} />} label="Ver solicitud" onClick={() => handleViewRequest(request)} />
                     {request.status === 'En Espera' && (
-                        <IconButton icon={<FaCheckCircle size={18} />} label="Marcar como confirmada" onClick={() => handleConfirmRequest(request.id)} />
+                        <IconButton icon={<FaCheckCircle size={18} />} label="Marcar como confirmada" onClick={() => handleApprovalRequest(request)} />
                     )}
                 </div>
             ),
