@@ -20,7 +20,6 @@ import RegisterSupply from "../pages/RegisterSupply";
 import RegisterSupplier from "../pages/RegisterSupplier";
 import RegisterSupplyRequest from "../pages/RegisterSupplyRequest";
 import RegisterSupplyCategory from "../pages/RegisterSupplyCategory";
-import Test from "../pages/tests/Test.tsx";
 import ProductConfirmationExample from "../pages/tests/ProductConfirmationExample.tsx";
 import UpdateProviderExample from "../pages/tests/UpdateProviderExample.tsx";
 import ApprovalModalExample from "../pages/tests/ApprovalExample.tsx";
@@ -54,7 +53,6 @@ function RouterPage() {
         <Route path="supply-categories/register" element={<RegisterSupplyCategory />} />
         <Route path="supply/register" element={<RegisterSupply />} />
 
-        <Route path="/test" element={<Test />} />
         <Route path="/modal-product-conf-test" element={<ProductConfirmationExample />} />
         <Route path="/modal-provider-test" element={<UpdateProviderExample />} />
         <Route path="/modal-approval-test" element={<ApprovalModalExample />} />
