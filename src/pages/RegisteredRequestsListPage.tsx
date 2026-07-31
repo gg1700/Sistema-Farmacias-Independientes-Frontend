@@ -9,7 +9,7 @@ import IconButton from '../components/ui/IconButton';
 import Pagination from '../components/features/Pagination';
 import useFilteredData from '../hooks/useFilteredData';
 import usePagination from '../hooks/usePagination';
-import type { RegisteredRequest } from '../types/Inventory';
+import type { RegisteredRequest } from '../types/inventory';
 import { registeredRequests } from '../constants/requests';
 import { useModal } from '../contexts/ModalContext';
 import { ApprovalModal } from '../components/modals/ApprovalModal';
