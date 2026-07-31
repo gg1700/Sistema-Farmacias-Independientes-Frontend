@@ -15,7 +15,7 @@ function SearchSelector({ subtitle, dropDownProps, actionButtonProps }: SearchSe
           </DropDown>
         </div>
         <div className="flex justify-center border-t-2 md:border-t-0 md:border-l-2 border-[#ADA87F] px-4 md:px-20 py-2 md:py-0.5 m-0 md:m-4 gap-1 w-full md:w-auto">
-          <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={IconName} action={action}>
+          <ActionButton bgColor={bgColor} hoverColor={hoverColor} IconName={IconName} action={action} clickAction={actionButtonProps.clickAction}>
           </ActionButton>
         </div>
       </div>  
