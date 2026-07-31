@@ -1,4 +1,4 @@
-import type { PurchaseProduct } from '../types/Inventory';
+import type { PurchaseProduct } from '../types/inventory';
 import purchaseProductDetailsData from '../data/purchaseProductDetails.json';
 
 const STORAGE_KEY_PREFIX = 'purchaseProducts:';

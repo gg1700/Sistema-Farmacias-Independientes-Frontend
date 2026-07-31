@@ -1,6 +1,6 @@
 import purchasesData from '../data/registeredPurchases.json';
 import purchaseProductDetailsData from '../data/purchaseProductDetails.json';
-import type { RegisteredPurchase, PurchaseProduct, PurchaseLineItem } from '../types/Inventory';
+import type { RegisteredPurchase, PurchaseProduct, PurchaseLineItem } from '../types/inventory';
 
 const purchases = purchasesData as RegisteredPurchase[];
 const purchaseProductDetailsByPurchaseId = purchaseProductDetailsData as Record<string, PurchaseProduct[]>;

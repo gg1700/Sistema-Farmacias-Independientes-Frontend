@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import DataTable, { type DataTableColumn } from '../components/features/DataTable';
 import IconButton from '../components/ui/IconButton';
-import AddButton from '../components/ui/AddButton';
+
 import Pagination from '../components/features/Pagination';
 import ExpirationDateBadge from '../components/features/ExpirationDateBadge';
 import usePagination from '../hooks/usePagination';
@@ -116,7 +116,6 @@ function PurchaseProductDetailPage() {
                 rows={paginatedItems}
                 getRowKey={(product) => product.id}
                 itemsPerPage={PRODUCTS_PER_PAGE}
-                footer={<AddButton />}
             />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
         </div>

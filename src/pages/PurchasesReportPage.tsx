@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import GroupedPurchasesPrintTable from '../components/features/GroupedPurchasesPrintTable';
 import PrintHeader from '../components/features/PrintHeader';
 import PrintActions from '../components/features/PrintActions';
-import type { PurchaseLineItem } from '../types/Inventory';
+import type { PurchaseLineItem } from '../types/inventory';
 
 const styles = {
     pageContainer: "w-full h-158 flex justify-center overflow-y-auto overflow-x-hidden pb-10",

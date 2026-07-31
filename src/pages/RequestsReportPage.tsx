@@ -3,7 +3,7 @@ import PrintTable, { type PrintTableColumn } from '../components/features/PrintT
 import RequestStatusBadge from '../components/features/RequestStatusBadge';
 import PrintHeader from '../components/features/PrintHeader';
 import PrintActions from '../components/features/PrintActions';
-import type { RegisteredRequest } from '../types/Inventory';
+import type { RegisteredRequest } from '../types/inventory';
 
 const styles = {
     pageContainer: "w-full h-158 flex justify-center overflow-y-auto overflow-x-hidden pb-10",
