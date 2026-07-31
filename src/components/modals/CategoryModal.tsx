@@ -63,7 +63,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
 
         <div>
           <p className="text-gray-800 font-medium mb-2">Subcategorias</p>
-          <div className="bg-[#D9D9D9] p-3 max-h-[200px] overflow-y-auto">
+          <div className="bg-[#D9D9D9] p-3 max-h-50 overflow-y-auto">
             <div className="space-y-2">
               <div className="grid grid-cols-2 gap-2 text-gray-800 font-medium text-sm border-b border-gray-400 pb-1">
                 <span>Nombre</span>

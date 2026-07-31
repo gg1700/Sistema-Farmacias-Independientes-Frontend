@@ -31,14 +31,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <p className="text-gray-800 font-medium mb-2">Descripción</p>
-            <div className="bg-[#D9D9D9] p-3 min-h-[150px] text-gray-800 text-sm">
+            <div className="bg-[#D9D9D9] p-3 min-h-37.5 text-gray-800 text-sm">
               {description || 'Sin descripción'}
             </div>
           </div>
 
           <div>
             <p className="text-gray-800 font-medium mb-2">Datos de Productos</p>
-            <div className="bg-[#D9D9D9] p-3 max-h-[200px] overflow-y-auto">
+            <div className="bg-[#D9D9D9] p-3 max-h-50 overflow-y-auto">
               <div className="space-y-2">
                 <div className="grid grid-cols-4 gap-2 text-gray-800 font-medium text-sm border-b border-gray-400 pb-1">
                   <span>No.</span>

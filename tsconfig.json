@@ -23,5 +23,4 @@
     "allowJs": false
   },
   "include": ["src"],
-  "exclude": ["src/pages/tests"]
 }
