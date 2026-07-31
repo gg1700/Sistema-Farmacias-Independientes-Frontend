@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import type { PurchaseLineItem } from '../../types/Inventory';
+import type { PurchaseLineItem } from '../../types/inventory';
 
 const styles = {
     scrollWrapper: "print-scroll-area overflow-y-auto overflow-x-hidden pr-1",
